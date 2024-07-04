@@ -1,30 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import {
-  MatAnchor,
-  MatButton,
-  MatFabAnchor,
-  MatFabButton,
-  MatIconButton,
-  MatMiniFabButton,
-} from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { MatDivider } from '@angular/material/divider';
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    MatAnchor,
     RouterLink,
-    MatIcon,
-    MatFabButton,
-    MatFabAnchor,
-    MatDivider,
-    MatMiniFabButton,
-    MatIconButton,
-    MatButton,
+    NgOptimizedImage,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

@@ -1,7 +1,11 @@
 <div class="flex h-full w-full flex-col items-center justify-center">
   <div class="w-full max-w-3xl">
     <div class="prose prose-sm mx-auto max-w-none">
-      <img class="w-20" src="images/logo/logo.svg" alt="Logo image" />
+      <img class="w-[200px]"
+           ngSrc="https://images.unsplash.com/photo-1719209618812-a11aea8d1a32?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
+          width="500"
+          height="500"
+           alt="Logo image" />
       <h1>Landing Module</h1>
       <p>
         This can be the landing or the welcome page of your application.
@@ -18,18 +22,14 @@
         applications within the same codebase.
       </p>
     </div>
+
     <div>
       <a
-        class="mt-8"
-        mat-flat-button
-        [color]="'primary'"
+        class="mt-8 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out flex items-center justify-center w-full max-w-xs mx-auto sm:w-auto sm:max-w-none sm:mx-0 sm:mt-12 md:mt-16 md:w-64 md:max-w-none md:mx-0 md:mt-20"
         [routerLink]="'/dashboards/project'"
       >
         <span>Launch the App</span>
-        <mat-icon
-          class="ml-2 icon-size-5"
-          [svgIcon]="'heroicons_mini:arrow-long-right'"
-        ></mat-icon>
+
       </a>
     </div>
   </div>

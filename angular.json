@@ -32,8 +32,6 @@
               }
             ],
             "styles": [
-              "src/styles/tailwind.scss",
-              "src/styles/themes.scss",
               "src/styles/main.scss"
             ],
             "scripts": []
@@ -93,8 +91,6 @@
               }
             ],
             "styles": [
-              "src/styles/tailwind.scss",
-              "src/styles/themes.scss",
               "src/styles/main.scss"
             ],
             "scripts": []
