@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
-import { ClickOutsideDirective } from '../../../../../shared/directives/click-outside.directive';
+import { ClickOutsideDirective } from '@app/shared/directives/click-outside.directive';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { ThemeService } from '../../../../../core/services/theme.service';
+import { ThemeService } from '@app/core/services/theme.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
