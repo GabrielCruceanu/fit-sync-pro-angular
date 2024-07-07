@@ -1,0 +1,13 @@
+<section class="fixed bottom-0 z-0 block w-full bg-white/50 shadow backdrop-blur-sm md:hidden">
+  <div class="flex justify-between text-xs font-semibold text-gray-600">
+    @for (menuItem of menuService.menu; track menuItem.label) {
+      <button
+        [routerLink]="menuItem.route"
+        routerLinkActive="bg-primary text-primary-foreground rounded-lg"
+        class="flex w-full flex-col items-center justify-center pt-3 pb-3 text-center hover:text-gray-800">
+        <svg-icon src="{{ menuItem.icon }}" [svgClass]="'h-5 w-5'"></svg-icon>
+        <span class="text-xs">{{ menuItem.label }}</span>
+      </button>
+    }
+  </div>
+</section>

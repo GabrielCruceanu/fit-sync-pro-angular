@@ -1,0 +1,19 @@
+<div class="dropdown relative inline-block" *ngFor="let menu of menuService.menu">
+  <!-- Button -->
+  <button
+    [ngClass]=" menu.active
+        ? 'bg-primary text-primary-foreground'
+        : 'text-muted-foreground/50 hover:bg-card hover:text-muted-foreground '
+    "
+    [routerLink]="menu.route"
+    routerLinkActive="bg-primary text-primary-foreground"
+    class="mr-2 inline-flex rounded-md px-3 py-2 text-sm font-medium text-foreground">
+    <span>{{ menu.label }}</span>
+  </button>
+  <!-- Dropdown  -->
+  <div
+    *ngIf="menu.children"
+    class="dropdown-content absolute top-[100%] min-w-[200px] origin-top-left text-foreground"
+    navbar-submenu
+    [submenu]="menu.children"></div>
+</div>

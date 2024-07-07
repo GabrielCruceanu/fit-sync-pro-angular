@@ -1,19 +1,15 @@
-import { MenuItem } from '@app/core/models/menu.model';
+import { MenuItem, SubMenuItem } from '@app/core/models/menu.model';
 
 export class Menu {
   public static pages: MenuItem[] = [
     {
-      group: 'Base',
+      group: 'client',
       separator: false,
       items: [
         {
           icon: 'assets/icons/heroicons/outline/chart-pie.svg',
           label: 'Dashboard',
           route: '/dashboard',
-          children: [
-            { label: 'Nfts', route: '/dashboard/nfts' },
-            // { label: 'Podcast', route: '/dashboard/podcast' },
-          ],
         },
         {
           icon: 'assets/icons/heroicons/outline/lock-closed.svg',
@@ -28,18 +24,24 @@ export class Menu {
           ],
         },
         {
-          icon: 'assets/icons/heroicons/outline/shield-exclamation.svg',
-          label: 'Erros',
-          route: '/errors',
-          children: [
-            { label: '404', route: '/errors/404' },
-            { label: '500', route: '/errors/500' },
-          ],
+          icon: 'assets/icons/heroicons/outline/trophy.svg',
+          label: 'Workouts',
+          route: '/workouts',
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/heart.svg',
+          label: 'Nutrition',
+          route: '/nutrition',
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/chat.svg',
+          label: 'Chat',
+          route: '/chat',
         },
       ],
     },
     {
-      group: 'Collaboration',
+      group: 'trainer',
       separator: true,
       items: [
         {
@@ -60,7 +62,7 @@ export class Menu {
       ],
     },
     {
-      group: 'Config',
+      group: 'nutritionist',
       separator: false,
       items: [
         {
@@ -84,6 +86,142 @@ export class Menu {
           ],
         },
       ],
+    },
+  ];
+
+  public static clientMenu: SubMenuItem[] = [
+    {
+      icon: 'assets/icons/heroicons/outline/chart-pie.svg',
+      label: 'Dashboard',
+      route: '/dashboard',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/flag.svg',
+      label: 'Progress',
+      route: '/progress',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/trophy.svg',
+      label: 'Workouts',
+      route: '/workouts',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/heart.svg',
+      label: 'Nutrition',
+      route: '/nutrition',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/chat.svg',
+      label: 'Chat',
+      route: '/chat',
+    },
+  ];
+  public static trainerMenu: SubMenuItem[] = [
+    {
+      icon: 'assets/icons/heroicons/outline/chart-pie.svg',
+      label: 'Dashboard',
+      route: '/dashboard',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/flag.svg',
+      label: 'Progress',
+      route: '/progress',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/trophy.svg',
+      label: 'Workouts',
+      route: '/workouts',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/heart.svg',
+      label: 'Nutrition',
+      route: '/nutrition',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/chat.svg',
+      label: 'Chat',
+      route: '/chat',
+    },
+  ];
+  public static nutritionistMenu: SubMenuItem[] = [
+    {
+      icon: 'assets/icons/heroicons/outline/chart-pie.svg',
+      label: 'Dashboard',
+      route: '/dashboard',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/flag.svg',
+      label: 'Progress',
+      route: '/progress',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/trophy.svg',
+      label: 'Workouts',
+      route: '/workouts',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/heart.svg',
+      label: 'Nutrition',
+      route: '/nutrition',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/chat.svg',
+      label: 'Chat',
+      route: '/chat',
+    },
+  ];
+  public static gymMenu: SubMenuItem[] = [
+    {
+      icon: 'assets/icons/heroicons/outline/chart-pie.svg',
+      label: 'Dashboard',
+      route: '/dashboard',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/flag.svg',
+      label: 'Progress',
+      route: '/progress',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/trophy.svg',
+      label: 'Workouts',
+      route: '/workouts',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/heart.svg',
+      label: 'Nutrition',
+      route: '/nutrition',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/chat.svg',
+      label: 'Chat',
+      route: '/chat',
+    },
+  ];
+  public static adminMenu: SubMenuItem[] = [
+    {
+      icon: 'assets/icons/heroicons/outline/chart-pie.svg',
+      label: 'Dashboard',
+      route: '/dashboard',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/flag.svg',
+      label: 'Progress',
+      route: '/progress',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/trophy.svg',
+      label: 'Workouts',
+      route: '/workouts',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/heart.svg',
+      label: 'Nutrition',
+      route: '/nutrition',
+    },
+    {
+      icon: 'assets/icons/heroicons/outline/chat.svg',
+      label: 'Chat',
+      route: '/chat',
     },
   ];
 }

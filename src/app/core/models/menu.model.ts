@@ -1,5 +1,7 @@
+export type MenuGroup = 'client' | 'trainer' | 'nutritionist' | 'gym' | 'admin';
+
 export interface MenuItem {
-  group: string;
+  group: MenuGroup;
   separator?: boolean;
   selected?: boolean;
   active?: boolean;
