@@ -33,6 +33,15 @@ const routes: Routes = [
     component: LayoutComponent,
     loadChildren: () => import('../nutrition/nutrition.module').then((m) => m.NutritionModule),
   },
+  {
+    path: 'chat',
+    component: LayoutComponent,
+    loadChildren: () => import('../chat/chat.module').then((m) => m.ChatModule),
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('../auth/auth.module').then((m) => m.AuthModule),
+  },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'error/404' },
 ];

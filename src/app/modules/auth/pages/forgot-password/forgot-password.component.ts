@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { InProgressComponent } from '@app/shared/pages/in-progress/in-progress.component';
 
 @Component({
-  selector: 'app-workout',
+  selector: 'app-forgot-password',
   standalone: true,
   imports: [InProgressComponent],
-  templateUrl: './workout.component.html',
-  styleUrl: './workout.component.scss',
+  templateUrl: './forgot-password.component.html',
+  styleUrl: './forgot-password.component.scss',
 })
-export class WorkoutComponent {}
+export class ForgotPasswordComponent {}

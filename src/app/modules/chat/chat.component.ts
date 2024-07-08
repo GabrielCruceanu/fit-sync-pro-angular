@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { InProgressComponent } from '@app/shared/pages/in-progress/in-progress.component';
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [],
+  imports: [InProgressComponent],
   templateUrl: './chat.component.html',
-  styleUrl: './chat.component.scss'
+  styleUrl: './chat.component.scss',
 })
-export class ChatComponent {
-
-}
+export class ChatComponent {}

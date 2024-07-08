@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { InProgressComponent } from '@app/shared/pages/in-progress/in-progress.component';
 
 @Component({
   selector: 'app-nutrition',
   standalone: true,
-  imports: [],
+  imports: [InProgressComponent],
   templateUrl: './nutrition.component.html',
-  styleUrl: './nutrition.component.scss'
+  styleUrl: './nutrition.component.scss',
 })
-export class NutritionComponent {
-
-}
+export class NutritionComponent {}
