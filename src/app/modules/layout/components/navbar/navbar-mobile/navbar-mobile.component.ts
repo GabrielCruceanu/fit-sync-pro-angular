@@ -4,6 +4,7 @@ import { NavbarMobileMenuComponent } from './navbar-mobile-menu/navbar-mobile-me
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgClass } from '@angular/common';
 import packageJson from '../../../../../../../package.json';
+import { ThemeService } from '@app/core/services/theme.service';
 
 @Component({
   selector: 'app-navbar-mobile',
@@ -14,7 +15,10 @@ import packageJson from '../../../../../../../package.json';
 })
 export class NavbarMobileComponent implements OnInit {
   public appJson: any = packageJson;
-  constructor(public menuService: MenuService) {}
+  constructor(
+    public menuService: MenuService,
+    public themeService: ThemeService,
+  ) {}
 
   ngOnInit(): void {}
 

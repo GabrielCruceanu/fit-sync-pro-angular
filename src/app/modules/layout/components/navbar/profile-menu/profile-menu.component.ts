@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { ClickOutsideDirective } from '@app/shared/directives/click-outside.directive';
 import { AngularSvgIconModule } from 'angular-svg-icon';
@@ -11,7 +11,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   templateUrl: './profile-menu.component.html',
   styleUrls: ['./profile-menu.component.scss'],
   standalone: true,
-  imports: [ClickOutsideDirective, NgClass, RouterLink, AngularSvgIconModule],
+  imports: [ClickOutsideDirective, NgClass, RouterLink, AngularSvgIconModule, RouterLinkActive],
   animations: [
     trigger('openClose', [
       state(

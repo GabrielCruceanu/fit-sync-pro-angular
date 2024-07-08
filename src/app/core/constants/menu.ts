@@ -25,8 +25,8 @@ export class Menu {
         },
         {
           icon: 'assets/icons/heroicons/outline/trophy.svg',
-          label: 'Workouts',
-          route: '/workouts',
+          label: 'Workout',
+          route: '/workout',
         },
         {
           icon: 'assets/icons/heroicons/outline/heart.svg',
@@ -102,8 +102,8 @@ export class Menu {
     },
     {
       icon: 'assets/icons/heroicons/outline/trophy.svg',
-      label: 'Workouts',
-      route: '/workouts',
+      label: 'Workout',
+      route: '/workout',
     },
     {
       icon: 'assets/icons/heroicons/outline/heart.svg',

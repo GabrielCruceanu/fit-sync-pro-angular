@@ -4,6 +4,7 @@ import packageJson from '../../../../../../package.json';
 import { NgClass, NgIf } from '@angular/common';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { SidebarMenuComponent } from '@app/modules/layout/components/sidebar/sidebar-menu/sidebar-menu.component';
+import { ThemeService } from '@app/core/services/theme.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +16,10 @@ import { SidebarMenuComponent } from '@app/modules/layout/components/sidebar/sid
 export class SidebarComponent {
   public appJson: any = packageJson;
 
-  constructor(public menuService: MenuService) {}
+  constructor(
+    public menuService: MenuService,
+    public themeService: ThemeService,
+  ) {}
 
   public toggleSidebar() {
     this.menuService.toggleSidebar();
