@@ -23,6 +23,11 @@ const routes: Routes = [
     component: LayoutComponent,
     loadChildren: () => import('../progress/progress.module').then((m) => m.ProgressModule),
   },
+  {
+    path: 'workout',
+    component: LayoutComponent,
+    loadChildren: () => import('../workout/workout.module').then((m) => m.WorkoutModule),
+  },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'error/404' },
 ];
