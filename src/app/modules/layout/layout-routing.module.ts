@@ -18,6 +18,11 @@ const routes: Routes = [
     component: LayoutComponent,
     loadChildren: () => import('../settings/settings.module').then((m) => m.SettingsModule),
   },
+  {
+    path: 'progress',
+    component: LayoutComponent,
+    loadChildren: () => import('../progress/progress.module').then((m) => m.ProgressModule),
+  },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'error/404' },
 ];
