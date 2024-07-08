@@ -13,6 +13,11 @@ const routes: Routes = [
     component: LayoutComponent,
     loadChildren: () => import('../profile/profile.module').then((m) => m.ProfileModule),
   },
+  {
+    path: 'settings',
+    component: LayoutComponent,
+    loadChildren: () => import('../settings/settings.module').then((m) => m.SettingsModule),
+  },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'error/404' },
 ];
