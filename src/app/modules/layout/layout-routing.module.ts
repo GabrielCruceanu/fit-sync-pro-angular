@@ -28,6 +28,11 @@ const routes: Routes = [
     component: LayoutComponent,
     loadChildren: () => import('../workout/workout.module').then((m) => m.WorkoutModule),
   },
+  {
+    path: 'nutrition',
+    component: LayoutComponent,
+    loadChildren: () => import('../nutrition/nutrition.module').then((m) => m.NutritionModule),
+  },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'error/404' },
 ];
