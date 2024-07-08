@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { ProfileRoutingModule } from '@app/modules/profile/profile-routing.module';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [CommonModule, ProfileRoutingModule],
 })
-export class ProfileModule { }
+export class ProfileModule {}

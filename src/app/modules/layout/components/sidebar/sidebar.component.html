@@ -6,7 +6,7 @@
         <a
           (click)="toggleSidebar()"
           class="flex cursor-pointer items-center justify-center rounded h-10">
-          <svg-icon src="assets/branding/fit-sync-pro-icon.svg"> </svg-icon>
+          <svg-icon class="w-10" [src]="themeService.isDark ? 'assets/branding/fit-sync-pro-icon-white.svg': 'assets/branding/fit-sync-pro-icon-black.svg'"> </svg-icon>
         </a>
         <b class="ml-1 pl-2 text-sm font-bold text-foreground">
           {{ appJson.displayName }}
