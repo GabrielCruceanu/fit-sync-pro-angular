@@ -26,6 +26,7 @@ export class ButtonComponent implements OnInit {
   full = input(false, {
     transform: (value: boolean | string) => (typeof value === 'string' ? value === '' : value),
   });
+  isDisabled = input(false);
 
   @Output() buttonClick = new EventEmitter<void>();
 

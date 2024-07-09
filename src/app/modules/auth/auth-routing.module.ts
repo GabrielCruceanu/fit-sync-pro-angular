@@ -1,26 +1,25 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { LoginComponent } from '@app/modules/auth/pages/login/login.component';
-import { SignupComponent } from '@app/modules/auth/pages/signup/signup.component';
-import { ForgotPasswordComponent } from '@app/modules/auth/pages/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'register',
-    component: SignupComponent,
-  },
-  {
-    path: 'forgot-password',
-    component: ForgotPasswordComponent,
+    children: [
+      {
+        path: 'confirmation-required',
+        loadChildren: () => import('@app/modules/auth/pages/confirmation-required/confirmation-required.routes'),
+      },
+      {
+        path: 'forgot-password',
+        loadChildren: () => import('@app/modules/auth/pages/forgot-password/forgot-password.routes'),
+      },
+      {
+        path: 'reset-password',
+        loadChildren: () => import('@app/modules/auth/pages/reset-password/reset-password.routes'),
+      },
+      { path: 'sign-in', loadChildren: () => import('@app/modules/auth/pages/sign-in/sign-in.routes') },
+      { path: 'sign-up', loadChildren: () => import('@app/modules/auth/pages/sign-up/sign-up.routes') },
+    ],
   },
 ];
 

@@ -12,24 +12,25 @@ import { finalize } from 'rxjs';
 import { animations } from '@app/core/animations';
 import { AlertType } from '@app/shared/components/alert/alert.types';
 import { AuthService } from '@app/modules/auth/auth.service';
+import { AppValidators } from '@app/shared/validators';
 import { AlertComponent } from '@app/shared/components/alert/alert.component';
 
 @Component({
-  selector: 'auth-forgot-password',
-  templateUrl: './forgot-password.component.html',
+  selector: 'auth-reset-password',
+  templateUrl: './reset-password.component.html',
   encapsulation: ViewEncapsulation.None,
   animations: animations,
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, RouterLink, AlertComponent],
 })
-export class AuthForgotPasswordComponent implements OnInit {
-  @ViewChild('forgotPasswordNgForm') forgotPasswordNgForm!: NgForm;
+export class AuthResetPasswordComponent implements OnInit {
+  @ViewChild('resetPasswordNgForm') resetPasswordNgForm!: NgForm;
 
   alert: { type: AlertType; message: string } = {
     type: 'success',
     message: '',
   };
-  forgotPasswordForm!: UntypedFormGroup;
+  resetPasswordForm!: UntypedFormGroup;
   showAlert: boolean = false;
 
   /**
@@ -49,9 +50,15 @@ export class AuthForgotPasswordComponent implements OnInit {
    */
   ngOnInit(): void {
     // Create the form
-    this.forgotPasswordForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-    });
+    this.resetPasswordForm = this._formBuilder.group(
+      {
+        password: ['', Validators.required],
+        passwordConfirm: ['', Validators.required],
+      },
+      {
+        validators: AppValidators.mustMatch('password', 'passwordConfirm'),
+      },
+    );
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -59,30 +66,30 @@ export class AuthForgotPasswordComponent implements OnInit {
   // -----------------------------------------------------------------------------------------------------
 
   /**
-   * Send the reset link
+   * Reset password
    */
-  sendResetLink(): void {
+  resetPassword(): void {
     // Return if the form is invalid
-    if (this.forgotPasswordForm.invalid) {
+    if (this.resetPasswordForm.invalid) {
       return;
     }
 
     // Disable the form
-    this.forgotPasswordForm.disable();
+    this.resetPasswordForm.disable();
 
     // Hide the alert
     this.showAlert = false;
 
-    // Forgot password
+    // Send the request to the server
     this._authService
-      .forgotPassword(this.forgotPasswordForm.get('email')?.value)
+      .resetPassword(this.resetPasswordForm.get('password')?.value)
       .pipe(
         finalize(() => {
           // Re-enable the form
-          this.forgotPasswordForm.enable();
+          this.resetPasswordForm.enable();
 
           // Reset the form
-          this.forgotPasswordNgForm.resetForm();
+          this.resetPasswordNgForm.resetForm();
 
           // Show the alert
           this.showAlert = true;
@@ -93,14 +100,14 @@ export class AuthForgotPasswordComponent implements OnInit {
           // Set the alert
           this.alert = {
             type: 'success',
-            message: "Password reset sent! You'll receive an email if you are registered on our system.",
+            message: 'Your password has been reset.',
           };
         },
         (response: any) => {
           // Set the alert
           this.alert = {
             type: 'error',
-            message: 'Email does not found! Are you sure you are already a member?',
+            message: 'Something went wrong, please try again.',
           };
         },
       );
