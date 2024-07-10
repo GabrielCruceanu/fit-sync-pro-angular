@@ -15,7 +15,7 @@
 <!--      </div>-->
 
       <!-- Logo -->
-      <div [ngClass]="{'hidden': menuService.showSideBar}" class="flex items-center justify-start sm:order-2 md:mr-10">
+      <div [ngClass]="{'lg:hidden': menuService.showSideBar}" class="flex items-center justify-start sm:order-2 md:mr-10">
         <a class="flex items-center justify-center rounded  focus:outline-none focus:ring-1">
           <svg-icon class="w-10" [src]="themeService.isDark ? 'assets/branding/fit-sync-pro-icon-white.svg': 'assets/branding/fit-sync-pro-icon-black.svg'"> </svg-icon>
         </a>

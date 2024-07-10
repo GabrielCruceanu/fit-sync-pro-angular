@@ -1,0 +1,94 @@
+@if (!dismissible || (dismissible && !dismissed)) {
+  <div
+    class="alert-container"
+    [@fadeIn]="!dismissed"
+    [@fadeOut]="!dismissed"
+  >
+    <!-- Border -->
+    @if (appearance === 'border') {
+      <div class="alert-border"></div>
+    }
+
+    <!-- Icon -->
+    @if (showIcon) {
+      <div class="alert-icon">
+        <!-- Custom icon -->
+        <div class="alert-custom-icon">
+          <ng-content select="[fuseAlertIcon]"></ng-content>
+        </div>
+
+        <!-- Default icons -->
+        <div class="alert-default-icon">
+          @if (type === 'primary') {
+            <svg-icon
+              [src]="'assets/icons/solid/check-circle.svg'"
+            ></svg-icon>
+          }
+
+          @if (type === 'accent') {
+            <svg-icon
+              [src]="'assets/icons/solid/check-circle.svg'"
+            ></svg-icon>
+          }
+
+          @if (type === 'warn') {
+            <svg-icon
+              [src]="'assets/icons/solid/x-circle.svg'"
+            ></svg-icon>
+          }
+
+          @if (type === 'basic') {
+            <svg-icon
+              [src]="'assets/icons/solid/check-circle.svg'"
+            ></svg-icon>
+          }
+
+          @if (type === 'info') {
+            <svg-icon
+              [src]="'assets/icons/solid/information-circle.svg'"
+            ></svg-icon>
+          }
+
+          @if (type === 'success') {
+            <svg-icon
+              [src]="'assets/icons/solid/check-circle.svg'"
+            ></svg-icon>
+          }
+
+          @if (type === 'warning') {
+            <svg-icon
+              [src]="'assets/icons/solid/exclamation-triangle.svg'"
+            ></svg-icon>
+          }
+
+          @if (type === 'error') {
+            <svg-icon
+              [src]="'assets/icons/solid/x-circle.svg'"
+            ></svg-icon>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Content -->
+    <div class="alert-content">
+      <div class="alert-title">
+        <ng-content select="[alertTitle]"></ng-content>
+      </div>
+
+      <div class="alert-message">
+        <ng-content></ng-content>
+      </div>
+    </div>
+
+    <!-- Dismiss button -->
+    <app-button
+      class="alert-dismiss-button"
+      (click)="dismiss()"
+    >
+      <svg-icon
+        [src]="'assets/icons/solid/x-mark.svg'"
+      ></svg-icon>
+    </app-button>
+  </div>
+}
