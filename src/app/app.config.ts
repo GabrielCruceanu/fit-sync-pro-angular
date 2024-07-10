@@ -4,6 +4,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AppRoutingModule } from '@app/app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideAuth } from '@app/modules/auth/auth.provider';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,5 +12,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(BrowserModule, AppRoutingModule),
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimationsAsync(),
+    provideAuth(),
   ],
 };

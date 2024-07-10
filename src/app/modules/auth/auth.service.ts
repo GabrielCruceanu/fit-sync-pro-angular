@@ -3,6 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 import { UserService } from '@app/core/user/user.service';
 import { AuthUtils } from '@app/modules/auth/auth.utils';
+import { AuthMockApi } from '@mock/common/auth/api';
+import { user as userData } from '@mock/common/user/data';
+import { cloneDeep } from 'lodash';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +15,8 @@ export class AuthService {
   private _authenticated: boolean = false;
   private _httpClient = inject(HttpClient);
   private _userService = inject(UserService);
+  private _authMockApi = inject(AuthMockApi);
+  private _router = inject(Router);
 
   // -----------------------------------------------------------------------------------------------------
   // @ Accessors
@@ -57,19 +63,38 @@ export class AuthService {
     if (this._authenticated) {
       return throwError('User is already logged in.');
     }
+    console.log('credentials', credentials);
+    // Sign in successful
 
-    return this._httpClient.post('api/auth/sign-in', credentials).pipe(
-      switchMap((response: any) => {
-        // Store the access token in the local storage
-        this.accessToken = response.accessToken;
+    // return this._httpClient.post('api/auth/sign-in', credentials).pipe(
+    //   switchMap((response: any) => {
+    //     // Store the access token in the local storage
+    //     this.accessToken = response.accessToken;
+    //
+    //     // Set the user on the user service
+    //     this._userService.user = response.user;
+    //
+    //     // Return a new observable with the response
+    //     return of(response);
+    //   }),
+    // );
 
-        // Set the user on the user service
-        this._userService.user = response.user;
+    if (credentials.email === 'client@fitsync.pro' && credentials.password === 'admin') {
+      this.accessToken = this._authMockApi._generateJWTToken();
+      this._userService.user = userData;
+      this._router.navigate(['dashboard']);
+      return of([
+        200,
+        {
+          user: cloneDeep(this._authMockApi._user),
+          accessToken: this._authMockApi._generateJWTToken(),
+          tokenType: 'bearer',
+        },
+      ]);
+    }
 
-        // Return a new observable with the response
-        return of(response);
-      }),
-    );
+    // Invalid credentials
+    return of([404, false]);
   }
 
   /**
@@ -81,31 +106,45 @@ export class AuthService {
       return throwError('Access token not found.');
     }
     // Sign in using the access token
-    return this._httpClient
-      .post('api/auth/sign-in-with-token', {
-        accessToken: this.accessToken,
-      })
-      .pipe(
-        catchError(() =>
-          // Return false
-          of(false),
-        ),
-        switchMap((response: any) => {
-          // Store the access token in the local storage
-          if (response.accessToken) {
-            this.accessToken = response.accessToken;
-          }
-
-          // Set the authenticated flag to true
-          this._authenticated = true;
-
-          // Set the user on the user service
-          this._userService.user = response.user;
-
-          // Return a new observable with the response
-          return of(true);
-        }),
-      );
+    // return this._httpClient
+    //   .post('api/auth/sign-in-with-token', {
+    //     accessToken: this.accessToken,
+    //   })
+    //   .pipe(
+    //     catchError(() =>
+    //       // Return false
+    //       of(false),
+    //     ),
+    //     switchMap((response: any) => {
+    //       // Store the access token in the local storage
+    //       if (response.accessToken) {
+    //         this.accessToken = response.accessToken;
+    //       }
+    //
+    //       // Set the authenticated flag to true
+    //       this._authenticated = true;
+    //
+    //       // Set the user on the user service
+    //       this._userService.user = response.user;
+    //
+    //       // Return a new observable with the response
+    //       return of(true);
+    //     }),
+    //   );
+    if (this.accessToken.length > 0) {
+      this._authenticated = true;
+      this._userService.user = userData;
+      this._router.navigate(['dashboard']);
+      return of([
+        200,
+        {
+          user: cloneDeep(this._authMockApi._user),
+          accessToken: this._authMockApi._generateJWTToken(),
+          tokenType: 'bearer',
+        },
+      ]);
+    }
+    return of([401, false]);
   }
 
   /**
@@ -115,10 +154,13 @@ export class AuthService {
     // Remove the access token from the local storage
     localStorage.removeItem('accessToken');
 
+    this.accessToken = '';
+
     // Set the authenticated flag to false
     this._authenticated = false;
 
     // Return a new observable
+    this._router.navigate(['auth/sign-in']);
     return of(true);
   }
 
@@ -127,7 +169,11 @@ export class AuthService {
    * @param user
    */
   signUp(user: { email: string; password: string }): Observable<any> {
-    return this._httpClient.post('api/auth/sign-up', user);
+    // return this._httpClient.post('api/auth/sign-up', user);
+    this.accessToken = this._authMockApi._generateJWTToken();
+    this._userService.user = userData;
+    this._router.navigate(['dashboard']);
+    return of(true);
   }
 
   /**

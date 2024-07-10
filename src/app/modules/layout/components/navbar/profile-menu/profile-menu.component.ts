@@ -5,6 +5,7 @@ import { ClickOutsideDirective } from '@app/shared/directives/click-outside.dire
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ThemeService } from '@app/core/services/theme.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { AuthService } from '@app/modules/auth/auth.service';
 
 @Component({
   selector: 'app-profile-menu',
@@ -48,11 +49,6 @@ export class ProfileMenuComponent implements OnInit {
       icon: './assets/icons/heroicons/outline/cog-6-tooth.svg',
       link: '/settings',
     },
-    {
-      title: 'Log out',
-      icon: './assets/icons/heroicons/outline/logout.svg',
-      link: '/auth',
-    },
   ];
 
   public themeColors = [
@@ -88,7 +84,10 @@ export class ProfileMenuComponent implements OnInit {
 
   public themeMode = ['light', 'dark'];
 
-  constructor(public themeService: ThemeService) {}
+  constructor(
+    public themeService: ThemeService,
+    private _authService: AuthService,
+  ) {}
 
   ngOnInit(): void {}
 
@@ -107,5 +106,9 @@ export class ProfileMenuComponent implements OnInit {
     this.themeService.theme.update((theme) => {
       return { ...theme, color: color };
     });
+  }
+
+  signOut() {
+    this._authService.signOut();
   }
 }

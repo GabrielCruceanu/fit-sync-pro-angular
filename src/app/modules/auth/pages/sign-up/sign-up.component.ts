@@ -1,106 +1,102 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { RouterLink } from '@angular/router';
 import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormBuilder,
+  FormGroup,
   FormsModule,
-  NgForm,
   ReactiveFormsModule,
-  UntypedFormBuilder,
-  UntypedFormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { AlertComponent } from '@app/shared/components/alert/alert.component';
-import { animations } from '@app/core/animations';
-import { AlertType } from '@app/shared/components/alert/alert.types';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { AuthService } from '@app/modules/auth/auth.service';
-import { ButtonComponent } from '@app/shared/components/button/button.component';
-import { SvgIconComponent } from 'angular-svg-icon';
+import { delay, Observable, of } from 'rxjs';
+
+export function asyncConfirmPasswordValidator(): AsyncValidatorFn {
+  return (control: AbstractControl): Observable<ValidationErrors | null> => {
+    const password = control.get('password');
+    const confirmPassword = control.get('confirmPassword');
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
+      return of({ passwordMismatch: true }).pipe(delay(1000));
+    }
+    return of(null).pipe(delay(1000));
+  };
+}
 
 @Component({
-  selector: 'auth-sign-up',
+  selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  encapsulation: ViewEncapsulation.None,
-  animations: animations,
+  styleUrls: ['./sign-up.component.scss'],
   standalone: true,
-  imports: [RouterLink, AlertComponent, FormsModule, ReactiveFormsModule, ButtonComponent, SvgIconComponent],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    RouterLink,
+    AngularSvgIconModule,
+    ButtonComponent,
+    JsonPipe,
+    NgClass,
+    NgIf,
+  ],
 })
-export class AuthSignUpComponent implements OnInit {
-  @ViewChild('signUpNgForm') signUpNgForm!: NgForm;
+export class SignUpComponent implements OnInit {
+  form!: FormGroup;
+  submitted = false;
+  passwordTextType!: boolean;
+  acceptTerm: boolean = false;
+  passwordDoesNotMatch: boolean = false;
 
-  alert: { type: AlertType; message: string } = {
-    type: 'success',
-    message: '',
-  };
-  signUpForm!: UntypedFormGroup;
-  showAlert: boolean = false;
-
-  /**
-   * Constructor
-   */
   constructor(
-    private _authService: AuthService,
-    private _formBuilder: UntypedFormBuilder,
-    private _router: Router,
+    private readonly _formBuilder: FormBuilder,
+    private readonly _authService: AuthService,
   ) {}
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Lifecycle hooks
-  // -----------------------------------------------------------------------------------------------------
+  get f() {
+    return this.form.controls;
+  }
 
-  /**
-   * On init
-   */
   ngOnInit(): void {
-    // Create the form
-    this.signUpForm = this._formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      company: [''],
-      agreements: ['', Validators.requiredTrue],
+    this.form = this._formBuilder.group({
+      email: ['', Validators.required, Validators.email],
+      password: ['', Validators.required, Validators.minLength(8)],
+      confirmPassword: ['', [Validators.required], [asyncConfirmPasswordValidator()]],
     });
   }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
+  // Public methods
+  togglePasswordTextType() {
+    this.passwordTextType = !this.passwordTextType;
+  }
 
-  /**
-   * Sign up
-   */
-  signUp(): void {
-    // Do nothing if the form is invalid
-    if (this.signUpForm.invalid) {
+  toggleAcceptTerm() {
+    this.acceptTerm = !this.acceptTerm;
+  }
+
+  resetPasswordDoesNotMatch() {
+    this.passwordDoesNotMatch = false;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    const { email, password, confirmPassword } = this.form.value;
+    console.log('this.form', this.form);
+    console.log('Email:', email);
+    console.log('Password:', password);
+    console.log('Confirm Password:', confirmPassword);
+    // stop here if form is invalid
+    if (this.form.invalid) {
       return;
     }
 
-    // Disable the form
-    this.signUpForm.disable();
+    if (password !== confirmPassword) {
+      this.passwordDoesNotMatch = true;
+      return;
+    }
 
-    // Hide the alert
-    this.showAlert = false;
-
-    // Sign up
-    this._authService.signUp(this.signUpForm.value).subscribe(
-      (response: any) => {
-        // Navigate to the confirmation required page
-        this._router.navigateByUrl('/confirmation-required');
-      },
-      (response: any) => {
-        // Re-enable the form
-        this.signUpForm.enable();
-
-        // Reset the form
-        this.signUpNgForm.resetForm();
-
-        // Set the alert
-        this.alert = {
-          type: 'error',
-          message: 'Something went wrong, please try again.',
-        };
-
-        // Show the alert
-        this.showAlert = true;
-      },
-    );
+    this._authService.signUp({ email, password });
   }
 }

@@ -8,10 +8,10 @@
  * @param next
  */
 import { HttpErrorResponse, HttpHandlerFn, HttpRequest } from '@angular/common/http';
-import { AuthService } from '@app/core/auth/auth.service';
 import { inject } from '@angular/core';
-import { AuthUtils } from '@app/core/auth/auth.utils';
 import { catchError, throwError } from 'rxjs';
+import { AuthService } from '@app/modules/auth/auth.service';
+import { AuthUtils } from '@app/modules/auth/auth.utils';
 
 export const authInterceptor = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const authService = inject(AuthService);

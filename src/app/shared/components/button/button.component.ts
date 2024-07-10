@@ -8,6 +8,7 @@ type ButtonProps = {
   shape: 'square' | 'rounded' | 'pill';
   tone: 'primary' | 'danger' | 'success' | 'warning' | 'info' | 'light';
   shadow: 'none' | 'small' | 'medium' | 'large';
+  disabled: boolean;
 };
 
 @Component({
@@ -26,7 +27,7 @@ export class ButtonComponent implements OnInit {
   full = input(false, {
     transform: (value: boolean | string) => (typeof value === 'string' ? value === '' : value),
   });
-  isDisabled = input(false);
+  disabled = input<ButtonProps['disabled']>(false);
 
   @Output() buttonClick = new EventEmitter<void>();
 

@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
-import { InProgressComponent } from '@app/shared/pages/in-progress/in-progress.component';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { ThemeService } from '@app/core/services/theme.service';
 
 @Component({
   selector: 'app-auth',
-  standalone: true,
-  imports: [InProgressComponent, RouterOutlet],
   templateUrl: './auth.component.html',
-  styleUrl: './auth.component.scss',
+  styleUrls: ['./auth.component.scss'],
+  standalone: true,
+  imports: [AngularSvgIconModule, RouterOutlet],
 })
-export class AuthComponent {}
+export class AuthComponent implements OnInit {
+  constructor(public themeService: ThemeService) {}
+
+  ngOnInit(): void {}
+}

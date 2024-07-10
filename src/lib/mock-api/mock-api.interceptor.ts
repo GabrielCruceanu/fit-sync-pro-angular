@@ -36,6 +36,7 @@ export const mockApiInterceptor = (
           status: 404,
           statusText: 'NOT FOUND',
         });
+
         return throwError(response);
       }
 

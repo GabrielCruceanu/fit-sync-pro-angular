@@ -10,7 +10,7 @@ import { MockApiService } from '@lib/mock-api';
 @Injectable({ providedIn: 'root' })
 export class AuthMockApi {
   private readonly _secret: any;
-  private _user: any = userData;
+  public _user: any = userData;
 
   /**
    * Constructor
@@ -47,7 +47,8 @@ export class AuthMockApi {
     // -----------------------------------------------------------------------------------------------------
     this._mockApiService.onPost('api/auth/sign-in', 1500).reply(({ request }) => {
       // Sign in successful
-      if (request.body.email === 'contact@gabrielcruceanu.dev' && request.body.password === 'admin') {
+      console.log('request.body', request.body);
+      if (request.body.email === 'client@fitsync.pro' && request.body.password === 'admin') {
         return [
           200,
           {
@@ -152,7 +153,7 @@ export class AuthMockApi {
    *
    * @private
    */
-  private _generateJWTToken(): string {
+  public _generateJWTToken(): string {
     // Define token header
     const header = {
       alg: 'HS256',
@@ -194,7 +195,7 @@ export class AuthMockApi {
    * @param token
    * @private
    */
-  private _verifyJWTToken(token: string): boolean {
+  public _verifyJWTToken(token: string): boolean {
     // Split the token into parts
     const parts = token.split('.');
     const header = parts[0];
