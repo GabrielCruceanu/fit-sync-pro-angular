@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { JsonPipe, NgClass, NgIf } from '@angular/common';
-import { AuthService } from '@app/modules/auth/auth.service';
 import { asyncConfirmPasswordValidator } from '@app/shared/validators';
+import { Store } from '@ngrx/store';
+import { signUp } from '@app/modules/auth/store/auth.actions';
+import { AlertComponent } from '@app/shared/components/alert/alert.component';
+import { selectAuthError, selectAuthLoading } from '@app/modules/auth/store/auth.selectors';
 
 @Component({
   selector: 'app-sign-up',
@@ -21,6 +24,7 @@ import { asyncConfirmPasswordValidator } from '@app/shared/validators';
     JsonPipe,
     NgClass,
     NgIf,
+    AlertComponent,
   ],
 })
 export class SignUpComponent implements OnInit {
@@ -30,9 +34,12 @@ export class SignUpComponent implements OnInit {
   acceptTerm: boolean = false;
   passwordDoesNotMatch: boolean = false;
 
+  authLoading: Signal<boolean> = this._store.selectSignal(selectAuthLoading);
+  authError: Signal<string> = this._store.selectSignal(selectAuthError);
+
   constructor(
     private readonly _formBuilder: FormBuilder,
-    private readonly _authService: AuthService,
+    private readonly _store: Store,
   ) {}
 
   get f() {
@@ -77,6 +84,6 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
-    this._authService.signUp({ email, password });
+    this._store.dispatch(signUp({ email, password }));
   }
 }

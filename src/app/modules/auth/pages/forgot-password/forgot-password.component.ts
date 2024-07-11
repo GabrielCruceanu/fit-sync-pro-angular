@@ -1,25 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { NgClass, NgIf } from '@angular/common';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
-import { AuthService } from '@app/modules/auth/auth.service';
+import { Store } from '@ngrx/store';
+import { forgotPassword } from '@app/modules/auth/store/auth.actions';
+import { selectAuthError, selectAuthLoading } from '@app/modules/auth/store/auth.selectors';
+import { AlertComponent } from '@app/shared/components/alert/alert.component';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, NgClass, NgIf, ButtonComponent],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    RouterLink,
+    AngularSvgIconModule,
+    NgClass,
+    NgIf,
+    ButtonComponent,
+    AlertComponent,
+  ],
 })
 export class ForgotPasswordComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
 
+  authLoading: Signal<boolean> = this._store.selectSignal(selectAuthLoading);
+  authError: Signal<string> = this._store.selectSignal(selectAuthError);
+
   constructor(
     private readonly _formBuilder: FormBuilder,
-    private readonly _authService: AuthService,
+    private readonly _store: Store,
   ) {}
 
   get f() {
@@ -41,6 +56,6 @@ export class ForgotPasswordComponent implements OnInit {
       return;
     }
 
-    this._authService.forgotPassword(email);
+    this._store.dispatch(forgotPassword(email));
   }
 }
