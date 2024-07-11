@@ -10,8 +10,8 @@
 import { HttpErrorResponse, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
-import { AuthService } from '@app/modules/auth/auth.service';
 import { AuthUtils } from '@app/modules/auth/auth.utils';
+import { AuthService } from '@app/modules/auth/services/auth.service';
 
 export const authInterceptor = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const authService = inject(AuthService);

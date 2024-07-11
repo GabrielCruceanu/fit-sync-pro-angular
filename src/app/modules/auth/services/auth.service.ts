@@ -1,12 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { UserService } from '@app/core/user/user.service';
 import { AuthUtils } from '@app/modules/auth/auth.utils';
 import { AuthMockApi } from '@mock/common/auth/api';
 import { user as userData } from '@mock/common/user/data';
 import { cloneDeep } from 'lodash';
 import { Router } from '@angular/router';
+import { UserService } from '@app/modules/auth/user.service';
 
 @Injectable({
   providedIn: 'root',

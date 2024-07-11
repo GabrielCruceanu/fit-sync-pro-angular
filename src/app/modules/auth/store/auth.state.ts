@@ -1,4 +1,4 @@
-import { User } from '@app/core/user/user.types';
+import { User } from '@app/modules/auth/models/user.model';
 
 export interface AuthState {
   user: User | null;

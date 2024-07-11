@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Quote } from '@app/core/models/quote.model';
-import { BEST_MOTIVATIONAL_QUOTES } from '@app/core/constants/quotes';
+import { BEST_MOTIVATIONAL_QUOTES } from '@app/shared/services/quotes/quotes';
 
 @Injectable({
   providedIn: 'root',
