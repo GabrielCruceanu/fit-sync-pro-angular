@@ -19,15 +19,14 @@
       <router-outlet></router-outlet>
     </div>
   </div>
-  <div class="auth-bg hidden flex-1 items-center justify-center bg-primary bg-cover lg:flex rounded-3xl my-7">
+  <div class="auth-bg hidden flex-1 items-center justify-center lg:flex rounded-3xl my-7">
     <div class="max-w-2xl space-y-4 p-8 text-center text-white">
-      <!--      <img src="./assets/images/auth-screens.png" alt="dashboard widget" />-->
       <p class="text-xl font-light">
-        {{ randomQuote?.text ? randomQuote?.text : 'It takes courage to grow up and become who you really are.' }}
+        {{ randomQuote.text }}
       </p>
       <h3 class="text-xl font-bold">
         "
-        {{ randomQuote?.author ? randomQuote?.author : 'E.E. Cummings' }}
+        {{ randomQuote.author }}
         "
       </h3>
     </div>

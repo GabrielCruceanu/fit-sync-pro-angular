@@ -1,11 +1,12 @@
-<section class="flex flex-col items-center max-w-[80%] mx-auto mt-10 text-foreground">
+<section class="flex flex-col items-center max-w-[80%] mx-auto mt-10">
   <div class="flex max-w-[80%] mx-auto">
     <svg-icon [svgClass]="'max-h-[250px] w-full'"  src="/assets/illustrations/design-components.svg"></svg-icon>
   </div>
   <h1 class="text-2xl md:text-3xl font-semibold mt-4 mb-2">{{title}} is under Construction</h1>
   <p class="mb-3">This page is under construction. Please check back later.</p>
 
-  <app-button (buttonClick)="goToHomePage()" impact="bold" tone="primary" shape="rounded" size="medium">
+  <app-button (buttonClick)="goToHomePage()" full impact="bold" tone="primary" shape="rounded" size="medium">
     Homepage
   </app-button>
+
 </section>

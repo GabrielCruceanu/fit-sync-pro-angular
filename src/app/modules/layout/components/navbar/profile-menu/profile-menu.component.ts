@@ -5,7 +5,8 @@ import { ClickOutsideDirective } from '@app/shared/directives/click-outside.dire
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ThemeService } from '@app/core/services/theme.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { AuthService } from '@app/modules/auth/auth.service';
+import { Store } from '@ngrx/store';
+import { signOut } from '@app/modules/auth/store/auth.actions';
 
 @Component({
   selector: 'app-profile-menu',
@@ -86,7 +87,7 @@ export class ProfileMenuComponent implements OnInit {
 
   constructor(
     public themeService: ThemeService,
-    private _authService: AuthService,
+    private _store: Store,
   ) {}
 
   ngOnInit(): void {}
@@ -109,6 +110,6 @@ export class ProfileMenuComponent implements OnInit {
   }
 
   signOut() {
-    this._authService.signOut();
+    this._store.dispatch(signOut());
   }
 }

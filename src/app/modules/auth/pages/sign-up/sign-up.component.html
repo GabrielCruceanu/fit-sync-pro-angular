@@ -4,8 +4,14 @@
     <p class="text-sm text-muted-foreground">Let's get started with your 30 day free trial</p>
   </div>
 
-  <div routerLink="/dashboard">
-    <app-button full impact="bold" tone="light" shape="rounded" size="medium">
+  @if(authError()) {
+    <app-alert [type]="'error'" [title]="'Auth Error'">
+      {{ authError() }}
+    </app-alert>
+  }
+
+  <div>
+    <app-button routerLink="/dashboard" full impact="bold" tone="light" shape="rounded" size="medium" [disabled]="authLoading()">
       <svg-icon src="assets/icons/google-logo.svg" [svgClass]="'h-6 w-6 mr-2'"> </svg-icon>
       Sign Up with Google
     </app-button>
@@ -123,7 +129,7 @@
 
   <!-- Submit Button -->
   <div>
-    <app-button full impact="bold" tone="primary" shape="rounded" size="medium" type="submit" [disabled]="!acceptTerm">
+    <app-button full impact="bold" tone="primary" shape="rounded" size="medium" type="submit" [disabled]="!acceptTerm || authLoading()">
       Sign up
     </app-button>
   </div>
@@ -131,7 +137,7 @@
   <!-- Sign-up -->
   <div class="flex items-center text-sm text-muted-foreground">
     Already have an Account?
-    <app-button routerLink="/auth/sign-in" impact="none" tone="primary" shape="rounded" size="small">
+    <app-button routerLink="/auth/sign-in" impact="none" tone="primary" shape="rounded" size="small" [disabled]="authLoading()">
       Sign in
     </app-button>
   </div>

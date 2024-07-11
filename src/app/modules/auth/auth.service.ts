@@ -46,7 +46,7 @@ export class AuthService {
     // return this._httpClient.post('api/auth/forgot-password', email);
     this.accessToken = this._authMockApi._generateJWTToken();
     this._userService.user = userData;
-    this._router.navigate(['dashboard']);
+    this._router.navigate(['/dashboard']);
     return of(true);
   }
 
