@@ -1,31 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { RouterLink } from '@angular/router';
-import {
-  AbstractControl,
-  AsyncValidatorFn,
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { AuthService } from '@app/modules/auth/auth.service';
-import { delay, Observable, of } from 'rxjs';
-
-export function asyncConfirmPasswordValidator(): AsyncValidatorFn {
-  return (control: AbstractControl): Observable<ValidationErrors | null> => {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
-      return of({ passwordMismatch: true }).pipe(delay(1000));
-    }
-    return of(null).pipe(delay(1000));
-  };
-}
+import { asyncConfirmPasswordValidator } from '@app/shared/validators';
 
 @Component({
   selector: 'app-sign-up',
