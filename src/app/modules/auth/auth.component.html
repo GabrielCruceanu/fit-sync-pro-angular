@@ -4,7 +4,14 @@
       <!-- logo -->
       <div class="flex items-center justify-center">
         <a class="">
-          <svg-icon [src]="themeService.isDark ? 'assets/branding/fit-sync-pro-icon-white.svg': 'assets/branding/fit-sync-pro-icon-black.svg'" [svgClass]="'h-5 w-5'"> </svg-icon>
+          <svg-icon
+            [src]="
+              themeService.isDark
+                ? 'assets/branding/fit-sync-pro-icon-white.svg'
+                : 'assets/branding/fit-sync-pro-icon-black.svg'
+            "
+            [svgClass]="'h-5 w-5'">
+          </svg-icon>
         </a>
         <b class="text-md font-semibold pl-3 text-foreground"> FitSyncPro </b>
       </div>
@@ -14,12 +21,15 @@
   </div>
   <div class="auth-bg hidden flex-1 items-center justify-center bg-primary bg-cover lg:flex rounded-3xl my-7">
     <div class="max-w-2xl space-y-4 p-8 text-center text-white">
-<!--      <img src="./assets/images/auth-screens.png" alt="dashboard widget" />-->
+      <!--      <img src="./assets/images/auth-screens.png" alt="dashboard widget" />-->
       <p class="text-xl font-light">
-        It takes courage to grow up and become who you really are.
+        {{ randomQuote?.text ? randomQuote?.text : 'It takes courage to grow up and become who you really are.' }}
       </p>
-      <h1 class="text-xl font-bold">"E.E. Cummings"</h1>
+      <h3 class="text-xl font-bold">
+        "
+        {{ randomQuote?.author ? randomQuote?.author : 'E.E. Cummings' }}
+        "
+      </h3>
     </div>
   </div>
-
 </div>

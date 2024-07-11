@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { UserService } from '@app/core/user/user.service';
 import { AuthUtils } from '@app/modules/auth/auth.utils';
 import { AuthMockApi } from '@mock/common/auth/api';
@@ -22,15 +22,15 @@ export class AuthService {
   // @ Accessors
   // -----------------------------------------------------------------------------------------------------
 
+  get accessToken(): string {
+    return localStorage.getItem('accessToken') ?? '';
+  }
+
   /**
    * Setter & getter for access token
    */
   set accessToken(token: string) {
     localStorage.setItem('accessToken', token);
-  }
-
-  get accessToken(): string {
-    return localStorage.getItem('accessToken') ?? '';
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -43,7 +43,11 @@ export class AuthService {
    */
 
   forgotPassword(email: string): Observable<any> {
-    return this._httpClient.post('api/auth/forgot-password', email);
+    // return this._httpClient.post('api/auth/forgot-password', email);
+    this.accessToken = this._authMockApi._generateJWTToken();
+    this._userService.user = userData;
+    this._router.navigate(['dashboard']);
+    return of(true);
   }
 
   /**
