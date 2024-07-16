@@ -1,0 +1,135 @@
+<h1 class="text-2xl font-bold leading-tight tracking-tight text-center">{{onboardingSteps[0].title}}</h1>
+<p class="mb-4 text-lg font-light text-gray-500 text-center lg:mb-6">
+  {{ onboardingSteps[0].description }}
+</p>
+<div class="grid gap-4">
+  <form class="grid md:grid-cols-2 gap-x-3 gap-y-4" [formGroup]="form">
+    <!--  firstName  -->
+    <div>
+      <div class="relative">
+        <input
+          type="text"
+          id="firstName"
+          [ngClass]="{ 'border-red-500': f['firstName'].touched && f['firstName'].errors }"
+          class="peer block"
+          placeholder=" "
+          formControlName="firstName" />
+        <label
+          for="firstName"
+          class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+          First Name
+        </label>
+      </div>
+      <div *ngIf="f['firstName'].touched && f['firstName'].errors" class="text-red-500 text-xs mt-2">
+        <div *ngIf="f['firstName'].errors?.['required']">Required field</div>
+      </div>
+    </div>
+    <!--  lastName  -->
+    <div>
+      <div class="relative">
+        <input
+          type="text"
+          id="lastName"
+          [ngClass]="{ 'border-red-500': f['lastName'].touched && f['lastName'].errors }"
+          class="peer block"
+          placeholder=" "
+          formControlName="lastName" />
+        <label
+          for="lastName"
+          class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+          Last Name
+        </label>
+      </div>
+      <div *ngIf="f['lastName'].touched && f['lastName'].errors" class="text-red-500 text-xs mt-2">
+        <div *ngIf="f['lastName'].errors?.['required']">Required field</div>
+      </div>
+    </div>
+    <!--  birthDate  -->
+    <div>
+      <div class="relative">
+        <input
+          type="date"
+          id="birthDate"
+          [ngClass]="{ 'border-red-500': f['birthDate'].touched && f['birthDate'].errors }"
+          class="peer block"
+          placeholder=" "
+          formControlName="birthDate" />
+        <label
+          for="birthDate"
+          class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+          Birth Date
+        </label>
+      </div>
+      <div *ngIf="f['birthDate'].touched && f['birthDate'].errors" class="text-red-500 text-xs mt-2">
+        <div *ngIf="f['birthDate'].errors?.['required']">Required field</div>
+      </div>
+    </div>
+    <!--  Gender  -->
+    <div>
+      <div class="relative">
+        <select
+          id="gender"
+          [ngClass]="{ 'border-red-500': f['gender'].touched && f['gender'].errors }"
+          class="peer block"
+          formControlName="gender">
+          @for (gender of genders; track gender) {
+            <option [value]="gender">{{ gender }}</option>
+          }
+        </select>
+
+        <label
+          for="birthDate"
+          class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+          Gender
+        </label>
+      </div>
+      <div *ngIf="f['gender'].touched && f['gender'].errors" class="text-red-500 text-xs mt-2">
+        <div *ngIf="f['gender'].errors?.['required']">Required field</div>
+      </div>
+    </div>
+    <!--  Height  -->
+    <div>
+      <div class="relative">
+        <input
+          type="number"
+          id="height"
+          [ngClass]="{ 'border-red-500': f['height'].touched && f['height'].errors }"
+          class="peer block"
+          placeholder=" "
+          formControlName="height" />
+        <label
+          for="height"
+          class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+          Height
+        </label>
+      </div>
+      <div *ngIf="f['height'].touched && f['height'].errors" class="text-red-500 text-xs mt-2">
+        <div *ngIf="f['height'].errors?.['required']">Required field</div>
+      </div>
+    </div>
+    <!--  Weight  -->
+    <div>
+      <div class="relative">
+        <input
+          type="number"
+          id="weight"
+          [ngClass]="{ 'border-red-500': f['weight'].touched && f['weight'].errors }"
+          class="peer block"
+          placeholder=" "
+          formControlName="weight" />
+        <label
+          for="weight"
+          class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+          Weight
+        </label>
+      </div>
+      <div *ngIf="f['weight'].touched && f['weight'].errors" class="text-red-500 text-xs mt-2">
+        <div *ngIf="f['weight'].errors?.['required']">Required field</div>
+      </div>
+    </div>
+  </form>
+  <div class="flex justify-between gap-3">
+    <app-button class="w-full" full [impact]="'none'" (click)="onBack()">Back</app-button>
+    <app-button class="w-full" full [impact]="'bold'" (click)="onSubmit()">Next</app-button>
+  </div>
+</div>

@@ -1,16 +1,29 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { map, Observable, ReplaySubject, tap } from 'rxjs';
+import { inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
+import { map, Observable, of, tap } from 'rxjs';
 import { User } from '@app/modules/auth/models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
   private _httpClient = inject(HttpClient);
-  private _user: ReplaySubject<User> = new ReplaySubject<User>(1);
+  private _hasOnboarding: WritableSignal<boolean> = signal(false);
+
+  get hasOnboarding(): Signal<boolean> {
+    return this._hasOnboarding;
+  }
 
   // -----------------------------------------------------------------------------------------------------
   // @ Accessors
   // -----------------------------------------------------------------------------------------------------
+
+  private _user: WritableSignal<User | null> = signal(null);
+
+  get user(): Signal<User | null> {
+    return this._user;
+  }
+
+  //**
+  // * Setter & getter for hasOnboarding
 
   /**
    * Setter & getter for user
@@ -19,11 +32,12 @@ export class UserService {
    */
   set user(value: User) {
     // Store the value
-    this._user.next(value);
+    this._user.set(value);
   }
 
-  get user$(): Observable<User> {
-    return this._user.asObservable();
+  // */
+  set setOnboarding(value: boolean) {
+    this._hasOnboarding.set(value);
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -36,7 +50,7 @@ export class UserService {
   get(): Observable<User> {
     return this._httpClient.get<User>('api/common/user').pipe(
       tap((user) => {
-        this._user.next(user);
+        this._user.set(user);
       }),
     );
   }
@@ -49,8 +63,18 @@ export class UserService {
   update(user: User): Observable<any> {
     return this._httpClient.patch<User>('api/common/user', { user }).pipe(
       map((response) => {
-        this._user.next(response);
+        this._user.set(response);
       }),
     );
+  }
+
+  checkOnboarding(): Observable<boolean> {
+    // Check if the user has completed the onboarding
+    if (this._hasOnboarding()) {
+      return of(true);
+    }
+
+    // If not, return false
+    return of(false);
   }
 }

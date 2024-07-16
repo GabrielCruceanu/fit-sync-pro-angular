@@ -1,4 +1,5 @@
 import { AuthState } from '@app/modules/auth/store/auth.state';
+import { OnboardingState } from '@app/modules/onboarding/store/onboarding.reducer';
 
 export enum Features {
   Auth = 'auth',
@@ -8,4 +9,5 @@ export enum Features {
 
 export interface AppState {
   auth: AuthState;
+  onboarding: OnboardingState;
 }

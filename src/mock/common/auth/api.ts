@@ -47,7 +47,6 @@ export class AuthMockApi {
     // -----------------------------------------------------------------------------------------------------
     this._mockApiService.onPost('api/auth/sign-in', 1500).reply(({ request }) => {
       // Sign in successful
-      console.log('request.body', request.body);
       if (request.body.email === 'client@fitsync.pro' && request.body.password === 'admin') {
         return [
           200,

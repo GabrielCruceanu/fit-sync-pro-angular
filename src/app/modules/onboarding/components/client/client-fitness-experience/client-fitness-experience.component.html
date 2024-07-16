@@ -1,0 +1,48 @@
+<div class="mb-4 lg:mb-6 text-center">
+  <h1 class="text-2xl font-bold leading-tight tracking-tight">{{ onboardingSteps[2].title }}</h1>
+  <p class="text-lg font-light text-gray-500">
+    {{ onboardingSteps[2].description }}
+  </p>
+
+  <div *ngIf="error" class="text-red-500 text-xs mt-2">
+    {{ error }}
+  </div>
+</div>
+<div class="grid gap-4">
+  <form [formGroup]="form">
+    <ul class="grid md:grid-cols-2 gap-x-3 gap-y-4" (change)="resetError()">
+      <li (click)="setExperience(fitnessExperience.Beginner)">
+        <input type="radio" id="beginner" class="hidden peer" name="experience" />
+        <label
+          for="beginner"
+          class="inline-flex items-center justify-center w-full p-3 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+          <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/trainer.svg"> </svg-icon>
+          <span class="w-full">{{ fitnessExperience.Beginner }}</span>
+        </label>
+      </li>
+      <li (click)="setExperience(fitnessExperience.Intermediate)">
+        <input type="radio" id="intermediate" class="hidden peer" name="experience" />
+        <label
+          for="intermediate"
+          class="inline-flex items-center justify-center w-full p-3 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+          <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/trainer.svg"> </svg-icon>
+          <span class="w-full">{{ fitnessExperience.Intermediate }}</span>
+        </label>
+      </li>
+      <li (click)="setExperience(fitnessExperience.Advanced)"
+      >
+        <input type="radio" id="advanced" class="hidden peer" name="experience" />
+        <label
+          for="advanced"
+          class="inline-flex items-center justify-center w-full p-3 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+          <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/trainer.svg"> </svg-icon>
+          <span class="w-full">{{ fitnessExperience.Advanced }}</span>
+        </label>
+      </li>
+    </ul>
+  </form>
+  <div class="flex justify-between gap-3">
+    <app-button class="w-full" full [impact]="'none'" (click)="onBack()">Back</app-button>
+    <app-button class="w-full" full [impact]="'bold'" (click)="onSubmit()">Next</app-button>
+  </div>
+</div>

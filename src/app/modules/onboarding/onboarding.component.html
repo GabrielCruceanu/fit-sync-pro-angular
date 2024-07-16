@@ -1,0 +1,44 @@
+<section class="py-8 bg-background text-foreground lg:py-0">
+  <div class="lg:flex">
+    @if (onboardingSteps().length) {
+      <app-onboarding-sidebar />
+    }
+
+    <div class="flex items-center mx-auto md:w-[42rem] px-4 md:px-8 xl:px-0 min-h-screen">
+      <div class="w-full md:min-h-[400px]">
+        <div class="flex items-center justify-center mb-8 space-x-4">
+          <a href="/" class="flex items-center text-2xl">
+            <img
+              class="w-8 h-8 mr-2"
+              [ngSrc]="
+                themeService.isDark
+                  ? 'assets/branding/fit-sync-pro-icon-white.svg'
+                  : 'assets/branding/fit-sync-pro-icon-black.svg'
+              "
+              width="32"
+              height="32"
+              alt="logo" />
+            <span class="text-gray-900 dark:text-white">FitSyncPro</span>
+          </a>
+        </div>
+        @switch (onboardingType$ | async) {
+          @case (OnboardingType.Welcome) {
+            <app-welcome />
+          }
+          @case (OnboardingType.Client) {
+            <app-client-onboarding />
+          }
+          @case (OnboardingType.Trainer) {
+            <app-trainer-onboarding />
+          }
+          @case (OnboardingType.Nutritionist) {
+            <app-nutritionist-onboarding />
+          }
+          @case (OnboardingType.Gym) {
+            <app-gym-onboarding />
+          }
+        }
+      </div>
+    </div>
+  </div>
+</section>

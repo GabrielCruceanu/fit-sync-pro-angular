@@ -14,7 +14,5 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class BottomNavbarComponent implements OnInit {
   constructor(public menuService: MenuService) {}
 
-  ngOnInit(): void {
-    console.log('menu', this.menuService.menu);
-  }
+  ngOnInit(): void {}
 }

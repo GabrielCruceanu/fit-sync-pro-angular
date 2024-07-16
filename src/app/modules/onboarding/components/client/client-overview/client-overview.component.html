@@ -1,0 +1,116 @@
+<h1 class="text-2xl font-bold leading-tight tracking-tight text-center">{{ onboardingSteps[7].title }}</h1>
+<p class="mb-4 text-lg font-light text-gray-500 text-center lg:mb-6">
+  {{ onboardingSteps[7].description }}
+</p>
+<div class="grid gap-4">
+  <div class="grid lg:grid-cols-2 gap-3">
+    <div>
+      <span class="mr-1">First Name:</span>
+      <strong class="font-semibold">{{ onboarding().personalDetails?.firstName }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Last Name:</span>
+      <strong class="font-semibold"> {{ onboarding().personalDetails?.lastName }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Birth Date:</span>
+      <strong class="font-semibold"> {{ onboarding().personalDetails?.birthDate }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Gender:</span>
+      <strong class="font-semibold"> {{ onboarding().personalDetails?.gender }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Height:</span>
+      <strong class="font-semibold"> {{ onboarding().personalDetails?.height }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Weight:</span>
+      <strong class="font-semibold"> {{ onboarding().personalDetails?.weight }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Goals:</span>
+      <ul class="ml-3 list-disc list-inside">
+        @for (goal of onboarding().goals; track goal) {
+          <li>
+            <strong class="font-semibold">{{ goal }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+    <div>
+      <span class="mr-1">Fitness Experience:</span>
+      <strong class="font-semibold"> {{ onboarding().fitnessExperience }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Training Location:</span>
+      <strong class="font-semibold"> {{ onboarding().trainingLocation }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">How to Train:</span> <strong class="font-semibold"> {{ onboarding().howToTrain }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Food Preferences:</span>
+
+      <ul class="ml-3 list-disc list-inside">
+        @for (food of onboarding().foodPreferences; track food) {
+          <li>
+            <strong class="font-semibold">{{ food }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+    <div>
+      <span class="mr-1">Allergic:</span>
+      <strong class="font-semibold"> {{ onboarding().isAllergic ? 'Yes' : 'No' }}</strong>
+    </div>
+    @if (onboarding().isAllergic) {
+      <div>
+        <span class="mr-1">Allergies:</span>
+
+        <ul class="ml-3 list-disc list-inside">
+          @for (allergy of onboarding().allergies; track allergy) {
+            <li>
+              <strong class="font-semibold">{{ allergy }}</strong>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+    <div>
+      <span class="mr-1">Availability Days:</span>
+
+      <ul class="ml-3 list-disc list-inside">
+        @for (day of onboarding().availabilityDays; track day) {
+          <li>
+            <strong class="font-semibold">{{ day }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+    <div>
+      <span class="mr-1">Availability Times:</span>
+
+      <ul class="ml-3 list-disc list-inside">
+        @for (time of onboarding().availabilityTimes; track time) {
+          <li>
+            <strong class="font-semibold">{{ time }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+    <div>
+      <span class="mr-1">Country:</span> <strong class="font-semibold"> {{ onboarding().country }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">County:</span> <strong class="font-semibold"> {{ onboarding().county }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">City:</span> <strong class="font-semibold"> {{ onboarding().city }}</strong>
+    </div>
+  </div>
+  <div class="flex justify-between gap-3">
+    <app-button class="w-full" full [impact]="'none'" (click)="onBack()">Back</app-button>
+    <app-button class="w-full" full [impact]="'bold'" (click)="onSubmit()">Finish</app-button>
+  </div>
+</div>
