@@ -4,7 +4,7 @@ module.exports = {
   prefix: '',
   mode: 'jit',
   important: false,
-  content: ['./src/**/*.{html,ts}'],
+  content: ['./src/**/*.{html,ts}', './node_modules/flowbite/**/*.js'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -110,5 +110,6 @@ module.exports = {
     require('@tailwindcss/aspect-ratio'),
     require('tailwind-scrollbar'),
     'prettier-plugin-tailwindcss',
+    require('flowbite/plugin'), // add this line
   ],
 };

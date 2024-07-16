@@ -1,0 +1,27 @@
+@switch (onboardingCurrentStep()) {
+  @case (clientOnboardingSteps.Goals) {
+    <app-client-goals/>
+  }
+  @case (clientOnboardingSteps.FitnessExperience) {
+    <app-client-fitness-experience/>
+  }
+  @case (clientOnboardingSteps.TrainingLocation) {
+    <app-client-training-location/>
+  }
+  @case (clientOnboardingSteps.DietaryPreferences) {
+    <app-client-food-preferences/>
+  }
+  @case (clientOnboardingSteps.Availability) {
+    <app-client-availability/>
+  }
+  @case (clientOnboardingSteps.Location){
+    <app-client-location/>
+  }
+  @case (clientOnboardingSteps.Overview) {
+    <app-client-overview/>
+  }
+
+  @default {
+    <app-client-personal-details/>
+  }
+}

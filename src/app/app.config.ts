@@ -11,6 +11,7 @@ import { AuthEffects } from '@app/modules/auth/store/auth.effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { environment } from '@env/environment';
 import { reducers } from '@app/store/store.config';
+import { OnboardingEffects } from '@app/modules/onboarding/store/onboarding.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideAuth(),
     provideStore(reducers),
-    provideEffects([AuthEffects]),
+    provideEffects([AuthEffects, OnboardingEffects]),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: environment.production,

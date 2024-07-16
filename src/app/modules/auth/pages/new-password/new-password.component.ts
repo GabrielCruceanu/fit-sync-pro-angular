@@ -62,8 +62,7 @@ export class NewPasswordComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     const { password, confirmPassword } = this.form.value;
-    console.log('password', password);
-    console.log('confirmPassword', confirmPassword);
+
     // stop here if form is invalid
     if (this.form.invalid) {
       return;

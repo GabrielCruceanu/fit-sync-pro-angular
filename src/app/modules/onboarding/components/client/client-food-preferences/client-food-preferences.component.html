@@ -1,0 +1,76 @@
+<div class="mb-4 lg:mb-6 text-center">
+  <h1 class="text-2xl font-bold leading-tight tracking-tight">{{ onboardingSteps[4].title }}</h1>
+  <p class="text-lg font-light text-gray-500">
+    {{ onboardingSteps[4].description }}
+  </p>
+
+  <div *ngIf="error" class="text-red-500 text-xs mt-2">
+    {{ error }}
+  </div>
+</div>
+<div class="grid gap-4">
+  <form [formGroup]="form" class="grid gap-3">
+    <ul formArrayName="foods" class="grid grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-4" (change)="resetError()">
+      @for (food of foods.controls; track i; let i = $index) {
+        <li [formGroupName]="i">
+          <input type="checkbox" [id]="i" class="hidden peer" formControlName="selected"/>
+          <label
+            [for]="i"
+            class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+            <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/nutrition.svg"></svg-icon>
+            <span class="w-full">{{ foods.at(i).get('name')?.value }}</span>
+          </label>
+        </li>
+      }
+    </ul>
+
+    <p>Do you have allergies?</p>
+
+    <ul class="grid grid-cols-2 gap-x-3 gap-y-4" (change)="resetError()">
+      <li (click)="setAllergic(true)">
+        <input type="radio" id="isAllergic" class="hidden peer" name="isAllergic" [checked]="isAllergicValue"/>
+        <label
+          for="isAllergic"
+          class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+          <!--          <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/trainer.svg"> </svg-icon>-->
+          <span>Yes</span>
+        </label>
+      </li>
+
+      <li (click)="setAllergic(false)">
+        <input type="radio" id="isNotAllergic" class="hidden peer" name="isAllergic" [checked]="!isAllergicValue"/>
+        <label
+          for="isNotAllergic"
+          class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+          <!--          <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/trainer.svg"> </svg-icon>-->
+          <span>No</span>
+        </label>
+      </li>
+    </ul>
+    @if (isAllergicValue) {
+      <div class="grid gap-3">
+        <p>What are your allergies?</p>
+        <ul class="grid grid-cols-2 md:grid-cols-3 gap-3">
+          @for (allergy of foodAllergies; track allergy) {
+            <li>
+              <input
+                class="hidden peer"
+                type="checkbox"
+                [id]="allergy"
+                [value]="allergy"
+                [checked]="allergies.includes(allergy)"
+                (change)="setAllergies(allergy)"/>
+              <label [for]="allergy"
+                     class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">{{ allergy }}</label>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </form>
+
+  <div class="flex justify-between gap-3">
+    <app-button class="w-full" full [impact]="'none'" size="large" (click)="onBack()">Back</app-button>
+    <app-button class="w-full" full [impact]="'bold'" size="large"  (click)="onSubmit()">Next</app-button>
+  </div>
+</div>

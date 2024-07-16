@@ -1,0 +1,30 @@
+<div class="hidden w-full max-w-md p-12 lg:h-screen lg:block bg-primary">
+  <!--  <div class="flex items-center mb-8 space-x-4">-->
+  <!--    <a href="/" class="flex items-center text-2xl font-light text-white">-->
+  <!--      <img class="w-8 h-8 mr-2"-->
+  <!--           height="32"-->
+  <!--            width="32"-->
+  <!--           [ngSrc]="themeService.isDark ? 'assets/branding/fit-sync-pro-icon-white.svg' : 'assets/branding/fit-sync-pro-icon-white.svg'" alt="logo"/>-->
+  <!--      FitSyncPro-->
+  <!--    </a>-->
+  <!--  </div>-->
+  <div class="block p-8 text-white rounded-lg bg-primary-500">
+    <h2 class="mb-1 text-2xl font-semibold">Welcome!</h2>
+    <p class="mb-4 font-light text-primary-100 sm:text-lg">Need to finish your account!</p>
+    <!-- List -->
+    <ul role="list" class="space-y-4 text-left">
+      @for (step of steps(); track step.id) {
+        <li class="flex items-center space-x-3">
+          <!-- Icon -->
+          <svg-icon
+            class="flex-shrink-0 w-5 h-5"
+            [ngClass]="step.completed ? 'text-green-300' : 'text-primary-foreground'"
+          [src]="step.completed ? 'assets/icons/heroicons/outline/check.svg' : 'assets/icons/heroicons/outline/stop.svg'"
+          ></svg-icon>
+          <!-- Title -->
+          <span>{{step.title}}</span>
+        </li>
+      }
+    </ul>
+  </div>
+</div>

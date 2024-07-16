@@ -5,3 +5,5 @@ export interface User {
   avatar?: string;
   status?: string;
 }
+
+export type UserType = 'admin' | 'client' | 'trainer' | 'nutritionist' | 'gym';

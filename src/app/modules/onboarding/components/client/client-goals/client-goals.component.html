@@ -1,0 +1,31 @@
+<div class="mb-4 lg:mb-6 text-center">
+  <h1 class="text-2xl font-bold leading-tight tracking-tight">{{onboardingSteps[1].title}}</h1>
+  <p class="text-lg font-light text-gray-500">
+    {{ onboardingSteps[1].description }}
+  </p>
+
+  <div *ngIf="error" class="text-red-500 text-xs mt-2">
+    {{ error }}
+  </div>
+</div>
+<div class="grid gap-4">
+  <form [formGroup]="form">
+    <ul  formArrayName="goals" class="grid md:grid-cols-2 gap-x-3 gap-y-4" (change)="resetError()">
+    @for (goal of goals.controls; track i; let i = $index) {
+      <li [formGroupName]="i">
+        <input type="checkbox" [id]="i"  class="hidden peer" formControlName="selected"/>
+        <label
+          [for]="i"
+          class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+          <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/flag.svg"> </svg-icon>
+          <span class="w-full">{{ goals.at(i).get('name')?.value}}</span>
+        </label>
+      </li>
+    }
+    </ul>
+  </form>
+  <div class="flex justify-between gap-3">
+    <app-button class="w-full" full [impact]="'none'" (click)="onBack()">Back</app-button>
+    <app-button class="w-full" full [impact]="'bold'" (click)="onSubmit()">Next</app-button>
+  </div>
+</div>

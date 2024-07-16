@@ -70,10 +70,7 @@ export class SignUpComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     const { email, password, confirmPassword } = this.form.value;
-    console.log('this.form', this.form);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Confirm Password:', confirmPassword);
+
     // stop here if form is invalid
     if (this.form.invalid) {
       return;

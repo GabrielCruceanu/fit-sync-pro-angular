@@ -2,12 +2,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '@app/modules/layout/layout.component';
 import { NgModule } from '@angular/core';
 import { AuthGuard } from '@app/modules/auth/guards/auth.guard';
+import { OnboardingGuard } from '@app/modules/layout/guards/onboarding.guard';
 
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
+    canActivate: [AuthGuard, OnboardingGuard],
+    canActivateChild: [AuthGuard, OnboardingGuard],
     component: LayoutComponent,
     children: [
       {
