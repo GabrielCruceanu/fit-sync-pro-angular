@@ -37,6 +37,7 @@ export class UserService {
 
   // */
   set setOnboarding(value: boolean) {
+    localStorage.setItem('hasOnboarding', 'true');
     this._hasOnboarding.set(value);
   }
 

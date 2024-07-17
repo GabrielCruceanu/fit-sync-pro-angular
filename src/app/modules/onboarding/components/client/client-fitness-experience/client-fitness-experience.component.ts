@@ -15,6 +15,7 @@ import {
   updateOnboardingStep,
 } from '@app/modules/onboarding/store/onboarding.actions';
 import { SvgIconComponent } from 'angular-svg-icon';
+import { selectOnboardingClient } from '@app/modules/onboarding/store/onboarding.selectors';
 
 @Component({
   selector: 'app-client-fitness-experience',
@@ -29,12 +30,14 @@ export class ClientFitnessExperienceComponent {
   onboardingSteps: OnboardingStep[] = ONBOARDING_CLIENT;
   error: string | null = null;
 
+  onboarding = this._store.selectSignal(selectOnboardingClient);
+
   constructor(
     private readonly _formBuilder: FormBuilder,
     private _store: Store,
   ) {
     this.form = this._formBuilder.group({
-      experience: ['', Validators.required],
+      experience: [this.onboarding().fitnessExperience ? this.fitnessExperience : '', Validators.required],
     });
   }
 

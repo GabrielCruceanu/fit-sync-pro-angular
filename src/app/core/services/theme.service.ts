@@ -5,7 +5,7 @@ import { Theme } from '@app/core/models/theme.model';
   providedIn: 'root',
 })
 export class ThemeService {
-  public theme = signal<Theme>({ mode: 'dark', color: 'base' });
+  public theme = signal<Theme>({ mode: 'light', color: 'base' });
 
   constructor() {
     this.loadTheme();

@@ -12,6 +12,7 @@ import {
 } from '@app/modules/onboarding/store/onboarding.actions';
 import { OnboardingClientSteps, OnboardingType } from '@app/modules/onboarding/models/onboarding.model';
 import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding-steps';
+import { selectOnboardingClient } from '@app/modules/onboarding/store/onboarding.selectors';
 
 @Component({
   selector: 'app-client-personal-details',
@@ -24,6 +25,9 @@ export class ClientPersonalDetailsComponent implements OnInit {
   form!: FormGroup;
   genders: string[] = GENDER_LIST;
   onboardingSteps = ONBOARDING_CLIENT;
+
+  onboarding = this._store.selectSignal(selectOnboardingClient);
+
   constructor(
     private readonly _formBuilder: FormBuilder,
     private _store: Store,
@@ -34,12 +38,30 @@ export class ClientPersonalDetailsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.form = this._formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      birthDate: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      height: ['', [Validators.required]],
-      weight: ['', [Validators.required]],
+      firstName: [
+        this.onboarding().personalDetails?.firstName ? this.onboarding().personalDetails?.firstName : '',
+        [Validators.required],
+      ],
+      lastName: [
+        this.onboarding().personalDetails?.lastName ? this.onboarding().personalDetails?.lastName : '',
+        [Validators.required],
+      ],
+      birthDate: [
+        this.onboarding().personalDetails?.birthDate ? this.onboarding().personalDetails?.birthDate : '',
+        [Validators.required],
+      ],
+      gender: [
+        this.onboarding().personalDetails?.gender ? this.onboarding().personalDetails?.gender : '',
+        [Validators.required],
+      ],
+      height: [
+        this.onboarding().personalDetails?.height ? this.onboarding().personalDetails?.height : '',
+        [Validators.required],
+      ],
+      weight: [
+        this.onboarding().personalDetails?.weight ? this.onboarding().personalDetails?.weight : '',
+        [Validators.required],
+      ],
     });
   }
 
@@ -62,6 +84,7 @@ export class ClientPersonalDetailsComponent implements OnInit {
       }),
     );
   }
+
   onBack() {
     this._store.dispatch(setOnboardingType({ onboardingType: OnboardingType.Welcome }));
   }

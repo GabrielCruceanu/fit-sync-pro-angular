@@ -11,6 +11,7 @@ import {
 } from '@app/modules/onboarding/store/onboarding.actions';
 import { OnboardingClientSteps } from '@app/modules/onboarding/models/onboarding.model';
 import { Store } from '@ngrx/store';
+import { selectOnboardingClient } from '@app/modules/onboarding/store/onboarding.selectors';
 
 @Component({
   selector: 'app-client-location',
@@ -22,9 +23,11 @@ import { Store } from '@ngrx/store';
 export class ClientLocationComponent {
   onboardingSteps = ONBOARDING_CLIENT;
   form!: FormGroup;
-  public countries = this._locationService.getCountries();
-  public counties = this._locationService.getCounties();
-  public cities = this._locationService.getCities();
+  countries = this._locationService.getCountries();
+  counties = this._locationService.getCounties();
+  cities = this._locationService.getCities();
+
+  onboarding = this._store.selectSignal(selectOnboardingClient);
 
   constructor(
     private _locationService: LocationService,
@@ -32,9 +35,9 @@ export class ClientLocationComponent {
     private _store: Store,
   ) {
     this.form = this._formBuilder.group({
-      country: ['', Validators.required],
-      county: ['', Validators.required],
-      city: ['', Validators.required],
+      country: [this.onboarding().country ? this.onboarding().country : '', Validators.required],
+      county: [this.onboarding().county ? this.onboarding().county : '', Validators.required],
+      city: [this.onboarding().city ? this.onboarding().city : '', Validators.required],
     });
   }
 
