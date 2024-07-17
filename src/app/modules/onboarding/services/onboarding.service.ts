@@ -9,12 +9,16 @@ import {
 } from '@app/modules/onboarding/constants/onboarding-steps';
 import { OnboardingStep, OnboardingType } from '@app/modules/onboarding/models/onboarding.model';
 import { OnboardingClient } from '@app/modules/onboarding/store/onboarding.reducer';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OnboardingService {
-  constructor(private _userService: UserService) {}
+  constructor(
+    private _userService: UserService,
+    private _router: Router,
+  ) {}
 
   getSteps(onboardingType: OnboardingType): Observable<OnboardingStep[]> {
     // Replace with real API call
@@ -40,6 +44,7 @@ export class OnboardingService {
     this._userService.setOnboarding = true;
     // Replace with real API call
     console.log('Onboarding data:', data);
+    this._router.navigate(['/dashboard']);
     return of(true);
   }
 }
