@@ -12,6 +12,7 @@ import {
   updateOnboardingStep,
 } from '@app/modules/onboarding/store/onboarding.actions';
 import { SvgIconComponent } from 'angular-svg-icon';
+import { selectOnboardingClient } from '@app/modules/onboarding/store/onboarding.selectors';
 
 @Component({
   selector: 'app-client-availability',
@@ -28,6 +29,8 @@ export class ClientAvailabilityComponent {
   onboardingSteps: OnboardingStep[] = ONBOARDING_CLIENT;
   error: string | null = null;
 
+  onboarding = this._store.selectSignal(selectOnboardingClient);
+
   constructor(
     private readonly _formBuilder: FormBuilder,
     private _store: Store,
@@ -37,7 +40,7 @@ export class ClientAvailabilityComponent {
         this.clientAvailabilityDays.map((day) =>
           this._formBuilder.group({
             name: [day.name],
-            selected: [day.selected],
+            selected: this.onboarding().availabilityDays.includes(day.name) ? true : [day.selected],
           }),
         ),
       ),
@@ -47,7 +50,7 @@ export class ClientAvailabilityComponent {
         this.clientAvailabilityTime.map((time) =>
           this._formBuilder.group({
             name: [time.name],
-            selected: [time.selected],
+            selected: this.onboarding().availabilityTimes.includes(time.name) ? true : [time.selected],
           }),
         ),
       ),
@@ -94,7 +97,7 @@ export class ClientAvailabilityComponent {
   }
 
   onBack() {
-    this._store.dispatch(setOnboardingSelectedStep({ step: OnboardingClientSteps.Goals }));
+    this._store.dispatch(setOnboardingSelectedStep({ step: OnboardingClientSteps.DietaryPreferences }));
   }
 
   resetError() {

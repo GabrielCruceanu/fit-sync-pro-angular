@@ -17,6 +17,7 @@ import {
   setOnboardingSelectedStep,
   updateOnboardingStep,
 } from '@app/modules/onboarding/store/onboarding.actions';
+import { selectOnboardingClient } from '@app/modules/onboarding/store/onboarding.selectors';
 
 @Component({
   selector: 'app-client-training-location',
@@ -33,13 +34,15 @@ export class ClientTrainingLocationComponent {
   onboardingSteps: OnboardingStep[] = ONBOARDING_CLIENT;
   error: string | null = null;
 
+  onboarding = this._store.selectSignal(selectOnboardingClient);
+
   constructor(
     private readonly _formBuilder: FormBuilder,
     private _store: Store,
   ) {
     this.form = this._formBuilder.group({
-      location: ['', Validators.required],
-      howToTrain: ['', Validators.required],
+      location: [this.onboarding().trainingLocation ? this.onboarding().trainingLocation : '', Validators.required],
+      howToTrain: [this.onboarding().howToTrain ? this.onboarding().howToTrain : '', Validators.required],
     });
   }
 
@@ -89,7 +92,7 @@ export class ClientTrainingLocationComponent {
   }
 
   onBack() {
-    this._store.dispatch(setOnboardingSelectedStep({ step: OnboardingClientSteps.Goals }));
+    this._store.dispatch(setOnboardingSelectedStep({ step: OnboardingClientSteps.FitnessExperience }));
   }
 
   resetError() {

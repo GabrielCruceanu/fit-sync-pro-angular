@@ -6,7 +6,7 @@
       <input type="radio" [id]="userType.id" name="userType" [value]="userType.type" class="hidden peer" required [checked]="userType.id === selectedUserType?.id" (change)="onSelectedUserType(userType)" />
       <label
         [for]="userType.id"
-        class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+        class="inline-flex items-center justify-center w-full p-2 text-gray-400 bg-transparent border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
         <svg-icon class="w-6 h-6 mr-2" [src]="'assets/icons/heroicons/outline/' + userType.icon"> </svg-icon>
         <span class="w-full">{{ userType.name }}</span>
         <svg class="w-6 h-6 ml-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

@@ -38,6 +38,6 @@ export class ClientOverviewComponent {
   }
 
   onBack() {
-    this._store.dispatch(setOnboardingSelectedStep({ step: OnboardingClientSteps.Availability }));
+    this._store.dispatch(setOnboardingSelectedStep({ step: OnboardingClientSteps.Location }));
   }
 }

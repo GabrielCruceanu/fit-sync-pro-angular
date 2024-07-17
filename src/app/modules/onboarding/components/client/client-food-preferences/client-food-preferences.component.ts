@@ -12,6 +12,7 @@ import {
   updateOnboardingStep,
 } from '@app/modules/onboarding/store/onboarding.actions';
 import { SvgIconComponent } from 'angular-svg-icon';
+import { selectOnboardingClient } from '@app/modules/onboarding/store/onboarding.selectors';
 
 @Component({
   selector: 'app-client-food-preferences',
@@ -29,6 +30,8 @@ export class ClientFoodPreferencesComponent {
   onboardingSteps: OnboardingStep[] = ONBOARDING_CLIENT;
   error: string | null = null;
 
+  onboarding = this._store.selectSignal(selectOnboardingClient);
+
   constructor(
     private readonly _formBuilder: FormBuilder,
     private _store: Store,
@@ -38,12 +41,15 @@ export class ClientFoodPreferencesComponent {
         this.foodPreferences.map((food) =>
           this._formBuilder.group({
             name: [food.name],
-            selected: [food.selected],
+            selected: this.onboarding().foodPreferences.includes(food.name) ? true : [food.selected],
           }),
         ),
       ),
-      isAllergic: [false],
+      isAllergic: [this.onboarding().isAllergic],
     });
+
+    this.isAllergicValue = this.onboarding().isAllergic;
+    this.allergies = this.onboarding().allergies.length > 0 ? this.onboarding().allergies : [];
   }
 
   get foods() {
@@ -100,7 +106,7 @@ export class ClientFoodPreferencesComponent {
   }
 
   onBack() {
-    this._store.dispatch(setOnboardingSelectedStep({ step: OnboardingClientSteps.Goals }));
+    this._store.dispatch(setOnboardingSelectedStep({ step: OnboardingClientSteps.TrainingLocation }));
   }
 
   resetError() {

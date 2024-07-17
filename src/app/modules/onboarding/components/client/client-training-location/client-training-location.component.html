@@ -16,10 +16,10 @@
         id="inPerson"
         class="hidden peer"
         name="location"
-        [checked]="location?.value === trainingLocation.InPerson" />
+        [checked]="onboarding().trainingLocation === trainingLocation.InPerson || location?.value === trainingLocation.InPerson" />
       <label
         for="InPerson"
-        class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+        class="inline-flex items-center justify-center w-full p-2 text-gray-400 bg-transparent border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
         <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/trainer.svg"> </svg-icon>
         <span class="w-full">{{ trainingLocation.InPerson }}</span>
       </label>
@@ -30,34 +30,34 @@
         id="online"
         class="hidden peer"
         name="location"
-        [checked]="location?.value === trainingLocation.Online" />
+        [checked]="onboarding().trainingLocation === trainingLocation.Online || location?.value === trainingLocation.Online" />
       <label
         for="online"
-        class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+        class="inline-flex items-center justify-center w-full p-2 text-gray-400 bg-transparent border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
         <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/trainer.svg"> </svg-icon>
         <span class="w-full">{{ trainingLocation.Online }}</span>
       </label>
     </li>
   </ul>
 
-  @if (location?.value === trainingLocation.InPerson) {
+  @if (onboarding().trainingLocation === trainingLocation.InPerson || location?.value === trainingLocation.InPerson) {
     <p>How would you like to train?</p>
     <ul class="grid md:grid-cols-2 gap-x-3 gap-y-4" (change)="resetError()">
       <li (click)="setHowToTrain(trainingInPerson.OneToOne)">
-        <input type="radio" id="oneToOne" class="hidden peer" name="trainingInPerson" />
+        <input type="radio" id="oneToOne" class="hidden peer" name="trainingInPerson" [checked]="onboarding().howToTrain === trainingInPerson.OneToOne"/>
         <label
           for="oneToOne"
-          class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+          class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 bg-transparent rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
           <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/trainer.svg"> </svg-icon>
           <span class="w-full">{{ trainingInPerson.OneToOne }}</span>
         </label>
       </li>
 
       <li (click)="setHowToTrain(trainingInPerson.Group)">
-        <input type="radio" id="group" class="hidden peer" name="trainingInPerson" />
+        <input type="radio" id="group" class="hidden peer" name="trainingInPerson"  [checked]="onboarding().howToTrain === trainingInPerson.Group"/>
         <label
           for="group"
-          class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+          class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 bg-transparent rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
           <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/trainer.svg"> </svg-icon>
           <span class="w-full">{{ trainingInPerson.Group }}</span>
         </label>
@@ -65,34 +65,34 @@
     </ul>
   }
 
-  @if (location?.value === trainingLocation.Online) {
+  @if (onboarding().trainingLocation === trainingLocation.Online || location?.value === trainingLocation.Online) {
     <p>How would you like to train?</p>
     <ul class="grid md:grid-cols-2 gap-x-3 gap-y-4" (change)="resetError()">
       <li (click)="setHowToTrain(trainingOnline.Home)">
-        <input type="radio" id="home" class="hidden peer" name="trainingOnline" />
+        <input type="radio" id="home" class="hidden peer" name="trainingOnline" [checked]="onboarding().howToTrain === trainingOnline.Home" />
         <label
           for="home"
-          class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+          class="inline-flex items-center justify-center w-full p-2 text-gray-400 bg-transparent border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
           <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/trainer.svg"> </svg-icon>
           <span class="w-full">{{ trainingOnline.Home }}</span>
         </label>
       </li>
 
       <li (click)="setHowToTrain(trainingOnline.Gym)">
-        <input type="radio" id="gym" class="hidden peer" name="trainingOnline" />
+        <input type="radio" id="gym" class="hidden peer" name="trainingOnline" [checked]="onboarding().howToTrain === trainingOnline.Gym" />
         <label
           for="gym"
-          class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+          class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 bg-transparent rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
           <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/trainer.svg"> </svg-icon>
           <span class="w-full">{{ trainingOnline.Gym }}</span>
         </label>
       </li>
 
       <li (click)="setHowToTrain(trainingOnline.Outdoor)">
-        <input type="radio" id="outdoor" class="hidden peer" name="trainingOnline" />
+        <input type="radio" id="outdoor" class="hidden peer" name="trainingOnline" [checked]="onboarding().howToTrain === trainingOnline.Outdoor" />
         <label
           for="outdoor"
-          class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary bg-gray-50 hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+          class="inline-flex items-center justify-center w-full p-2 text-gray-400 bg-transparent border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
           <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/trainer.svg"> </svg-icon>
           <span class="w-full">{{ trainingOnline.Outdoor }}</span>
         </label>
@@ -100,7 +100,7 @@
     </ul>
   }
 
-  <div class="flex justify-between gap-3">
+  <div class="flex justify-between gap-3 mt-4">
     <app-button class="w-full" full [impact]="'none'" (click)="onBack()">Back</app-button>
     <app-button class="w-full" full [impact]="'bold'" (click)="onSubmit()">Next</app-button>
   </div>

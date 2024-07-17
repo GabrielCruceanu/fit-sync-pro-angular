@@ -12,6 +12,7 @@ import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding-
 import { CLIENT_FITNESS_GOALS } from '@app/core/constants/client';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { NgIf } from '@angular/common';
+import { selectOnboardingClient } from '@app/modules/onboarding/store/onboarding.selectors';
 
 @Component({
   selector: 'app-client-goals',
@@ -26,6 +27,8 @@ export class ClientGoalsComponent implements OnInit {
   onboardingSteps: OnboardingStep[] = ONBOARDING_CLIENT;
   error: string | null = null;
 
+  onboarding = this._store.selectSignal(selectOnboardingClient);
+
   constructor(
     private readonly _formBuilder: FormBuilder,
     private _store: Store,
@@ -35,7 +38,7 @@ export class ClientGoalsComponent implements OnInit {
         this.clientFitnessGoals.map((goal) =>
           this._formBuilder.group({
             name: [goal.name],
-            selected: [goal.selected],
+            selected: this.onboarding().goals.includes(goal.name) ? true : [goal.selected],
           }),
         ),
       ),
