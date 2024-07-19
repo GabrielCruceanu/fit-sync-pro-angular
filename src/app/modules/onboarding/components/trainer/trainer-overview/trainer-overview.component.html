@@ -1,0 +1,148 @@
+<h1 class="text-2xl font-bold leading-tight tracking-tight text-center">{{ onboardingSteps[7].title }}</h1>
+<p class="mb-4 text-lg font-light text-gray-500 text-center lg:mb-6">
+  {{ onboardingSteps[7].description }}
+</p>
+<div class="grid gap-4 text-wrap">
+  <div class="grid lg:grid-cols-2 gap-3">
+    <div>
+      <span class="mr-1">First Name:</span>
+      <strong class="font-semibold">{{ onboarding().personalDetails?.firstName }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Last Name:</span>
+      <strong class="font-semibold"> {{ onboarding().personalDetails?.lastName }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Birth Date:</span>
+      <strong class="font-semibold"> {{ onboarding().personalDetails?.birthDate }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Gender:</span>
+      <strong class="font-semibold"> {{ onboarding().personalDetails?.gender }}</strong>
+    </div>
+    <div *ngIf="onboarding().contactDetails?.phone">
+      <span class="mr-1">Phone:</span>
+      <strong class="font-semibold"> {{ onboarding().contactDetails?.phone }}</strong>
+    </div>
+    <div *ngIf="onboarding().contactDetails?.website">
+      <span class="mr-1">Website:</span>
+      <strong class="font-semibold"> {{ onboarding().contactDetails?.website }}</strong>
+    </div>
+    <div *ngIf="onboarding().contactDetails?.facebook">
+      <span class="mr-1">Facebook:</span>
+      <strong class="font-semibold"> {{ onboarding().contactDetails?.facebook }}</strong>
+    </div>
+    <div *ngIf="onboarding().contactDetails?.instagram">
+      <span class="mr-1">Instagram:</span>
+      <strong class="font-semibold"> {{ onboarding().contactDetails?.instagram }}</strong>
+    </div>
+    <div *ngIf="onboarding().contactDetails?.linkedin">
+      <span class="mr-1">Linkedin:</span>
+      <strong class="font-semibold"> {{ onboarding().contactDetails?.linkedin }}</strong>
+    </div>
+    <div *ngIf="onboarding().contactDetails?.twitter">
+      <span class="mr-1">Twitter:</span>
+      <strong class="font-semibold"> {{ onboarding().contactDetails?.twitter }}</strong>
+    </div>
+    <div *ngIf="onboarding().isNutritionist">
+      <span class="mr-1">Nutritionist Type:</span>
+      <strong class="font-semibold"> {{ onboarding().nutritionistType }}</strong>
+    </div>
+    <div *ngIf="onboarding().isNutritionist">
+      <span class="mr-1">Nutritionist Experience:</span>
+      <strong class="font-semibold"> {{ onboarding().nutritionistExperience }}</strong>
+    </div>
+    <div *ngIf="onboarding().isNutritionist">
+      <span class="mr-1">Diets:</span>
+      <ul class="ml-3 list-disc list-inside">
+        @for (diet of onboarding().nutritionistDiets; track diet) {
+          <li>
+            <strong class="font-semibold">{{ diet }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+    <div>
+      <span class="mr-1">Trainer Type:</span>
+      <strong class="font-semibold"> {{ onboarding().trainerType }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Training Experience:</span>
+      <strong class="font-semibold"> {{ onboarding().trainingExperience }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Training Location:</span>
+
+      <ul class="ml-3 list-disc list-inside">
+        @for (location of onboarding().trainingLocation; track location) {
+          <li>
+            <strong class="font-semibold">{{ location }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+    <div *ngIf="onboarding().trainingLocation.includes(trainingLocation.Online)">
+      <span class="mr-1">Training Online:</span>
+
+      <ul class="ml-3 list-disc list-inside">
+        @for (online of onboarding().trainingOnline; track online) {
+          <li>
+            <strong class="font-semibold">{{ online }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+    <div *ngIf="onboarding().trainingLocation.includes(trainingLocation.InPerson)">
+      <span class="mr-1">Training In Person:</span>
+
+      <ul class="ml-3 list-disc list-inside">
+        @for (inPerson of onboarding().trainingInPerson; track inPerson) {
+          <li>
+            <strong class="font-semibold">{{ inPerson }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+    <div>
+      <span class="mr-1">Availability Days:</span>
+
+      <ul class="ml-3 list-disc list-inside">
+        @for (day of onboarding().availabilityDays; track day) {
+          <li>
+            <strong class="font-semibold">{{ day }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+    <div>
+      <span class="mr-1">Availability Times:</span>
+
+      <ul class="ml-3 list-disc list-inside">
+        @for (time of onboarding().availabilityTimes; track time) {
+          <li>
+            <strong class="font-semibold">{{ time }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+    <div>
+      <span class="mr-1">Country:</span> <strong class="font-semibold"> {{ onboarding().country }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">County:</span> <strong class="font-semibold"> {{ onboarding().county }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">City:</span> <strong class="font-semibold"> {{ onboarding().city }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Street name and number:</span> <strong class="font-semibold"> {{ onboarding().fullStreet }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Gym Name:</span> <strong class="font-semibold"> {{ onboarding().gymName }}</strong>
+    </div>
+  </div>
+  <div class="flex justify-between gap-3">
+    <app-button class="w-full" full [impact]="'none'" (click)="onBack()">Back</app-button>
+    <app-button class="w-full" full [impact]="'bold'" (click)="onSubmit()">Finish</app-button>
+  </div>
+</div>

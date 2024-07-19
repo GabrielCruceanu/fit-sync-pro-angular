@@ -3,7 +3,7 @@ import { LocationService } from '@app/core/services/location.service';
 import { JsonPipe, NgClass, NgForOf, NgIf } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
-import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding-steps';
+import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding';
 import {
   setClientOnboardingLocation,
   setOnboardingSelectedStep,

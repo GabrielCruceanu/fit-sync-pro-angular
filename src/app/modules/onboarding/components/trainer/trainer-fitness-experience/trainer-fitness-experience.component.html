@@ -1,0 +1,68 @@
+<div class="mb-4 lg:mb-6 text-center">
+  <h1 class="text-2xl font-bold leading-tight tracking-tight">{{ onboardingSteps[3].title }}</h1>
+  <p class="text-lg font-light text-gray-500">
+    {{ onboardingSteps[3].description }}
+  </p>
+
+  <div *ngIf="error" class="text-red-500 text-xs mt-2">
+    {{ error }}
+  </div>
+</div>
+<div class="grid gap-4">
+  <form [formGroup]="form" class="grid gap-3">
+    <!--  Trainer Type  -->
+    <div class="grid md:grid-cols-2 gap-x-3 gap-y-4">
+      <div class="w-full">
+        <div class="relative">
+          <select
+            id="trainerType"
+            [ngClass]="{ 'border-red-500': trainerType?.touched && trainerType?.errors }"
+            class="peer block"
+            (change)="resetError()"
+            formControlName="trainerType">
+            @for (type of trainerTypes; track type) {
+              <option [value]="type">{{ type }}</option>
+            }
+          </select>
+
+          <label
+            for="trainerType"
+            class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+            Trainer Type
+          </label>
+        </div>
+        <div *ngIf="trainerType?.touched && trainerType?.errors" class="text-red-500 text-xs mt-2">
+          <div *ngIf="trainerType?.errors?.['required']">Required field</div>
+        </div>
+      </div>
+      <!--  Trainer Experience  -->
+      <div>
+        <div class="relative">
+          <select
+            id="trainingExperience"
+            [ngClass]="{ 'border-red-500': trainingExperience?.touched && trainingExperience?.errors }"
+            class="peer block"
+            (change)="resetError()"
+            formControlName="trainingExperience">
+            @for (year of yearsOfExperience; track year) {
+              <option [value]="year">{{ year }}</option>
+            }
+          </select>
+          <label
+            for="trainingExperience"
+            class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+            Years of Experience
+          </label>
+        </div>
+        <div *ngIf="trainingExperience?.touched && trainingExperience?.errors" class="text-red-500 text-xs mt-2">
+          <div *ngIf="trainingExperience?.errors?.['required']">Required field</div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="flex justify-between gap-3 mt-4">
+    <app-button class="w-full" full [impact]="'none'" (click)="onBack()">Back</app-button>
+    <app-button class="w-full" full [impact]="'bold'" (click)="onSubmit()">Next</app-button>
+  </div>
+</div>

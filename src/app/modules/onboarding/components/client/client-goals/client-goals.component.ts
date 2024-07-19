@@ -8,11 +8,11 @@ import {
   updateOnboardingStep,
 } from '@app/modules/onboarding/store/onboarding.actions';
 import { OnboardingClientSteps, OnboardingStep } from '@app/modules/onboarding/models/onboarding.model';
-import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding-steps';
-import { CLIENT_FITNESS_GOALS } from '@app/core/constants/client';
+import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { NgIf } from '@angular/common';
 import { selectOnboardingClient } from '@app/modules/onboarding/store/onboarding.selectors';
+import { CLIENT_FITNESS_GOALS } from '@app/modules/onboarding/constants/client';
 
 @Component({
   selector: 'app-client-goals',

@@ -1,1 +1,26 @@
-<p>trainer-onboarding works!</p>
+@switch (onboardingCurrentStep()) {
+  @case (trainerOnboardingSteps.Contact) {
+    <app-trainer-contact-details/>
+  }
+  @case (trainerOnboardingSteps.NutritionExperience) {
+    <app-trainer-nutritionist-experience/>
+  }
+  @case (trainerOnboardingSteps.FitnessExperience) {
+    <app-trainer-fitness-experience/>
+  }
+  @case (trainerOnboardingSteps.TrainingLocation) {
+    <app-trainer-training-location/>
+  }
+  @case (trainerOnboardingSteps.Availability) {
+    <app-trainer-availability/>
+  }
+  @case(trainerOnboardingSteps.Location){
+    <app-trainer-location/>
+  }
+  @case (trainerOnboardingSteps.Overview) {
+    <app-trainer-overview/>
+  }
+  @default {
+    <app-trainer-personal-details/>
+  }
+}

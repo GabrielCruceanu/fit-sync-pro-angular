@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
-import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding-steps';
+import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding';
 import {
   completeOnboardingClient,
   setOnboardingSelectedStep,

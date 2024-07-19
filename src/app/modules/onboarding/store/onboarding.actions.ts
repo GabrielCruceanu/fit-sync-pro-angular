@@ -2,14 +2,17 @@ import { createAction, props } from '@ngrx/store';
 import { ResponseError } from '../models/response-error.model';
 import {
   OnboardingClientSteps,
+  OnboardingContactDetails,
   OnboardingGymSteps,
   OnboardingNutritionistSteps,
+  OnboardingPersonalDetails,
   OnboardingStep,
   OnboardingTrainerSteps,
   OnboardingType,
 } from '@app/modules/onboarding/models/onboarding.model';
-import { ClientOnboardingPersonalDetails } from '@app/modules/onboarding/models/client-onboarding-data.model';
-import { OnboardingClient } from '@app/modules/onboarding/store/onboarding.reducer';
+import { ClientOnboardingPersonalDetails, OnboardingClient } from '@app/modules/onboarding/models/client.model';
+import { NutritionistType } from '@app/modules/onboarding/models/nutritionist.model';
+import { OnboardingTrainer, TrainerType } from '@app/modules/onboarding/models/trainer.model';
 
 export const setOnboardingType = createAction(
   '[Onboarding] Set Onboarding Type',
@@ -120,6 +123,81 @@ export const completeOnboardingClientSuccess = createAction('[Onboarding] Comple
 
 export const completeOnboardingClientFailure = createAction(
   '[Onboarding] Complete Onboarding Client Failure',
+  props<{
+    error: ResponseError;
+  }>(),
+);
+
+export const setTrainerOnboardingPersonalDetails = createAction(
+  '[Onboarding] Set Trainer Onboarding Personal Details',
+  props<{
+    personalDetails: OnboardingPersonalDetails;
+  }>(),
+);
+
+export const setTrainerOnboardingContactDetails = createAction(
+  '[Onboarding] Set Trainer Onboarding Contact Details',
+  props<{
+    contactDetails: OnboardingContactDetails;
+  }>(),
+);
+
+export const setTrainerOnboardingNutritionistDetails = createAction(
+  '[Onboarding] Set Trainer Onboarding Nutritionist Details',
+  props<{
+    isNutritionist: boolean;
+    nutritionistType: NutritionistType;
+    nutritionistExperience: string;
+    nutritionistDiets: string[];
+  }>(),
+);
+
+export const setTrainerOnboardingFitnessExperience = createAction(
+  '[Onboarding] Set Trainer Onboarding Fitness Experience',
+  props<{
+    trainerType: TrainerType | null;
+    trainingExperience: string;
+  }>(),
+);
+
+export const setTrainerOnboardingTrainingLocation = createAction(
+  '[Onboarding] Set Trainer Onboarding Training Location',
+  props<{
+    trainingLocation: string[];
+    trainingOnline: string[];
+    trainingInPerson: string[];
+  }>(),
+);
+
+export const setTrainerOnboardingAvailability = createAction(
+  '[Onboarding] Set Trainer Onboarding Availability',
+  props<{
+    availability: { days: string[]; times: string[] };
+  }>(),
+);
+
+export const setTrainerOnboardingLocation = createAction(
+  '[Onboarding] Set Trainer Onboarding Location',
+  props<{
+    country: string;
+    county: string;
+    city: string;
+    fullStreet: string;
+    gymName: string;
+  }>(),
+);
+
+export const completeOnboardingTrainer = createAction(
+  '[Onboarding] Complete Onboarding Trainer',
+  props<{
+    trainerData: OnboardingTrainer;
+  }>(),
+);
+
+export const completeOnboardingTrainerSuccess = createAction('[Onboarding] Complete Onboarding Trainer Success');
+
+export const completeOnboardingTrainerFailure = createAction(
+  '[Onboarding] Complete Onboarding Trainer Failure',
   props<{
     error: ResponseError;
   }>(),

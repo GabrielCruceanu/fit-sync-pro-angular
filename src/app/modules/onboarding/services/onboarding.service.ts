@@ -6,10 +6,11 @@ import {
   ONBOARDING_CLIENT,
   ONBOARDING_NUTRITIONIST,
   ONBOARDING_TRAINER,
-} from '@app/modules/onboarding/constants/onboarding-steps';
+} from '@app/modules/onboarding/constants/onboarding';
 import { OnboardingStep, OnboardingType } from '@app/modules/onboarding/models/onboarding.model';
-import { OnboardingClient } from '@app/modules/onboarding/store/onboarding.reducer';
 import { Router } from '@angular/router';
+import { OnboardingClient } from '@app/modules/onboarding/models/client.model';
+import { OnboardingTrainer } from '@app/modules/onboarding/models/trainer.model';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +42,13 @@ export class OnboardingService {
   }
 
   setOnboardingClientData(data: OnboardingClient): Observable<boolean> {
+    this._userService.setOnboarding = true;
+    // Replace with real API call
+    console.log('Onboarding data:', data);
+    this._router.navigate(['/dashboard']);
+    return of(true);
+  }
+  setOnboardingTrainerData(data: OnboardingTrainer): Observable<boolean> {
     this._userService.setOnboarding = true;
     // Replace with real API call
     console.log('Onboarding data:', data);

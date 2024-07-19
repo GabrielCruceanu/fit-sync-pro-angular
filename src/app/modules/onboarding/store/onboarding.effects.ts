@@ -31,6 +31,18 @@ export class OnboardingEffects {
     ),
   );
 
+  completeOnboardingTrainer$ = createEffect(() =>
+    this._actions.pipe(
+      ofType(OnboardingActions.completeOnboardingTrainer),
+      mergeMap(({ trainerData }) =>
+        this._onboardingService.setOnboardingTrainerData(trainerData).pipe(
+          map(() => OnboardingActions.completeOnboardingTrainerSuccess()),
+          catchError((error) => of(OnboardingActions.completeOnboardingTrainerFailure({ error }))),
+        ),
+      ),
+    ),
+  );
+
   constructor(
     private _actions: Actions,
     private _onboardingService: OnboardingService,

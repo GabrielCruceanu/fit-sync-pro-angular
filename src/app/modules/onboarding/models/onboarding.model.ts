@@ -19,8 +19,6 @@ export enum OnboardingClientSteps {
   DietaryPreferences = 'DIETARY_PREFERENCES',
   FitnessExperience = 'FITNESS_EXPERIENCE',
   TrainingLocation = 'TRAINING_LOCATION',
-  TrainingOnlinePreferences = 'TRAINING_ONLINE_PREFERENCES',
-  TrainingInPersonPreferences = 'TRAINING_IN_PERSON_PREFERENCES',
   Availability = 'AVAILABILITY',
   Location = 'LOCATION',
   Notifications = 'NOTIFICATIONS',
@@ -155,3 +153,19 @@ export type ClientFitnessGoalsType =
   | 'Flexibility'
   | 'Health Improvement'
   | 'General Fitness';
+
+export interface OnboardingPersonalDetails {
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  gender: string;
+}
+
+export interface OnboardingContactDetails {
+  phone: string;
+  website: string;
+  facebook: string;
+  instagram: string;
+  linkedin: string;
+  twitter: string;
+}

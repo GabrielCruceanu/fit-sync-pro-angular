@@ -9,7 +9,6 @@ import {
   selectOnboardingLoading,
   selectOnboardingType,
 } from '@app/modules/onboarding/store/onboarding.selectors';
-import { OnboardingData } from '@app/modules/onboarding/models/onboarding-data.model';
 import { OnboardingSidebarComponent } from '@app/modules/onboarding/components/onboarding-sidebar/onboarding-sidebar.component';
 import { ThemeService } from '@app/core/services/theme.service';
 import { AsyncPipe, JsonPipe, NgOptimizedImage } from '@angular/common';
@@ -44,8 +43,6 @@ export class OnboardingComponent {
   onboardingType$: Observable<OnboardingType>;
 
   onboardingSteps: Signal<OnboardingStep[]>;
-
-  data: OnboardingData | undefined;
 
   constructor(
     public themeService: ThemeService,

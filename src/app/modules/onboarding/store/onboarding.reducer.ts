@@ -10,23 +10,8 @@ import {
   OnboardingTrainerSteps,
   OnboardingType,
 } from '@app/modules/onboarding/models/onboarding.model';
-import { ClientOnboardingPersonalDetails } from '@app/modules/onboarding/models/client-onboarding-data.model';
-
-export interface OnboardingClient {
-  personalDetails: ClientOnboardingPersonalDetails | null;
-  goals: string[];
-  fitnessExperience: string;
-  trainingLocation: string;
-  howToTrain: string;
-  foodPreferences: string[];
-  isAllergic: boolean;
-  allergies: string[];
-  availabilityDays: string[];
-  availabilityTimes: string[];
-  country: string;
-  county: string;
-  city: string;
-}
+import { OnboardingClient } from '@app/modules/onboarding/models/client.model';
+import { OnboardingTrainer } from '@app/modules/onboarding/models/trainer.model';
 
 export interface OnboardingState extends EntityState<OnboardingStep> {
   error: ResponseError | null;
@@ -40,6 +25,7 @@ export interface OnboardingState extends EntityState<OnboardingStep> {
     | null;
   type: OnboardingType;
   client: OnboardingClient;
+  trainer: OnboardingTrainer;
 }
 
 export const adapter: EntityAdapter<OnboardingStep> = createEntityAdapter<OnboardingStep>();
@@ -64,6 +50,26 @@ export const initialState: OnboardingState = adapter.getInitialState({
     country: '',
     county: '',
     city: '',
+  },
+  trainer: {
+    personalDetails: null,
+    contactDetails: null,
+    isNutritionist: false,
+    nutritionistType: null,
+    nutritionistExperience: '',
+    nutritionistDiets: [],
+    trainerType: null,
+    trainingExperience: '',
+    trainingLocation: [],
+    trainingOnline: [],
+    trainingInPerson: [],
+    availabilityDays: [],
+    availabilityTimes: [],
+    country: '',
+    county: '',
+    city: '',
+    fullStreet: '',
+    gymName: '',
   },
 });
 
@@ -166,6 +172,86 @@ export const onboardingReducer = createReducer(
     completed: true,
   })),
   on(OnboardingActions.completeOnboardingClientFailure, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  })),
+  on(OnboardingActions.setTrainerOnboardingPersonalDetails, (state, { personalDetails }) => ({
+    ...state,
+    trainer: {
+      ...state.trainer,
+      personalDetails,
+    },
+  })),
+  on(OnboardingActions.setTrainerOnboardingContactDetails, (state, { contactDetails }) => ({
+    ...state,
+    trainer: {
+      ...state.trainer,
+      contactDetails,
+    },
+  })),
+  on(
+    OnboardingActions.setTrainerOnboardingNutritionistDetails,
+    (state, { isNutritionist, nutritionistType, nutritionistExperience, nutritionistDiets }) => ({
+      ...state,
+      trainer: {
+        ...state.trainer,
+        isNutritionist,
+        nutritionistType,
+        nutritionistExperience,
+        nutritionistDiets,
+      },
+    }),
+  ),
+  on(OnboardingActions.setTrainerOnboardingFitnessExperience, (state, { trainerType, trainingExperience }) => ({
+    ...state,
+    trainer: {
+      ...state.trainer,
+      trainerType,
+      trainingExperience,
+    },
+  })),
+  on(
+    OnboardingActions.setTrainerOnboardingTrainingLocation,
+    (state, { trainingLocation, trainingOnline, trainingInPerson }) => ({
+      ...state,
+      trainer: {
+        ...state.trainer,
+        trainingLocation,
+        trainingOnline,
+        trainingInPerson,
+      },
+    }),
+  ),
+  on(OnboardingActions.setTrainerOnboardingAvailability, (state, { availability }) => ({
+    ...state,
+    trainer: {
+      ...state.trainer,
+      availabilityDays: availability.days,
+      availabilityTimes: availability.times,
+    },
+  })),
+  on(OnboardingActions.setTrainerOnboardingLocation, (state, { country, county, city, fullStreet, gymName }) => ({
+    ...state,
+    trainer: {
+      ...state.trainer,
+      country,
+      county,
+      city,
+      fullStreet,
+      gymName,
+    },
+  })),
+  on(OnboardingActions.completeOnboardingTrainer, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(OnboardingActions.completeOnboardingTrainerSuccess, (state) => ({
+    ...state,
+    loading: false,
+    completed: true,
+  })),
+  on(OnboardingActions.completeOnboardingTrainerFailure, (state, { error }) => ({
     ...state,
     error,
     loading: false,
