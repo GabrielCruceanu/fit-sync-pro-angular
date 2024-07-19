@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgForOf, NgIf } from '@angular/common';
-import { CLIENT_FOOD_ALLERGIES, CLIENT_FOOD_PREFERENCES } from '@app/core/constants/client';
 import { OnboardingClientSteps, OnboardingStep } from '@app/modules/onboarding/models/onboarding.model';
-import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding-steps';
+import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding';
 import { Store } from '@ngrx/store';
 import {
   setClientOnboardingFoodPreferences,
@@ -13,6 +12,7 @@ import {
 } from '@app/modules/onboarding/store/onboarding.actions';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { selectOnboardingClient } from '@app/modules/onboarding/store/onboarding.selectors';
+import { CLIENT_FOOD_ALLERGIES, CLIENT_FOOD_PREFERENCES } from '@app/modules/onboarding/constants/client';
 
 @Component({
   selector: 'app-client-food-preferences',

@@ -11,7 +11,7 @@ import {
   updateOnboardingStep,
 } from '@app/modules/onboarding/store/onboarding.actions';
 import { OnboardingClientSteps, OnboardingType } from '@app/modules/onboarding/models/onboarding.model';
-import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding-steps';
+import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding';
 import { selectOnboardingClient } from '@app/modules/onboarding/store/onboarding.selectors';
 
 @Component({

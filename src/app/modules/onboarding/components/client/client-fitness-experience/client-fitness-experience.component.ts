@@ -7,7 +7,7 @@ import {
   OnboardingClientSteps,
   OnboardingStep,
 } from '@app/modules/onboarding/models/onboarding.model';
-import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding-steps';
+import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding';
 import { Store } from '@ngrx/store';
 import {
   setClientOnboardingFitnessExperience,

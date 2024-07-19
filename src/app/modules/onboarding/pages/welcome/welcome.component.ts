@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { USER_TYPES } from '@app/modules/onboarding/constants/onboarding-steps';
+import { USER_TYPES } from '@app/modules/onboarding/constants/onboarding';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { OnboardingUserType } from '@app/modules/onboarding/models/onboarding-user-type.model';

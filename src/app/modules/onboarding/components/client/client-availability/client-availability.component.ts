@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { ButtonComponent } from '@app/shared/components/button/button.component';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { CLIENT_AVAILABILITY_DAYS, CLIENT_AVAILABILITY_TIME } from '@app/core/constants/client';
 import { OnboardingClientSteps, OnboardingStep } from '@app/modules/onboarding/models/onboarding.model';
-import { ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding-steps';
+import { AVAILABILITY_DAYS, AVAILABILITY_TIME, ONBOARDING_CLIENT } from '@app/modules/onboarding/constants/onboarding';
 import { Store } from '@ngrx/store';
 import {
   setClientOnboardingAvailability,
@@ -24,8 +23,8 @@ import { selectOnboardingClient } from '@app/modules/onboarding/store/onboarding
 export class ClientAvailabilityComponent {
   daysForm!: FormGroup;
   timesForm!: FormGroup;
-  clientAvailabilityDays = CLIENT_AVAILABILITY_DAYS;
-  clientAvailabilityTime = CLIENT_AVAILABILITY_TIME;
+  clientAvailabilityDays = AVAILABILITY_DAYS;
+  clientAvailabilityTime = AVAILABILITY_TIME;
   onboardingSteps: OnboardingStep[] = ONBOARDING_CLIENT;
   error: string | null = null;
 
