@@ -11,7 +11,7 @@ import {
   OnboardingType,
 } from '@app/modules/onboarding/models/onboarding.model';
 import { ClientOnboardingPersonalDetails, OnboardingClient } from '@app/modules/onboarding/models/client.model';
-import { NutritionistType } from '@app/modules/onboarding/models/nutritionist.model';
+import { NutritionistType, OnboardingNutritionist } from '@app/modules/onboarding/models/nutritionist.model';
 import { OnboardingTrainer, TrainerType } from '@app/modules/onboarding/models/trainer.model';
 
 export const setOnboardingType = createAction(
@@ -198,6 +198,72 @@ export const completeOnboardingTrainerSuccess = createAction('[Onboarding] Compl
 
 export const completeOnboardingTrainerFailure = createAction(
   '[Onboarding] Complete Onboarding Trainer Failure',
+  props<{
+    error: ResponseError;
+  }>(),
+);
+
+export const setNutritionistOnboardingPersonalDetails = createAction(
+  '[Onboarding] Set Nutritionist Onboarding Personal Details',
+  props<{
+    personalDetails: OnboardingPersonalDetails;
+  }>(),
+);
+
+export const setNutritionistOnboardingContactDetails = createAction(
+  '[Onboarding] Set Nutritionist Onboarding Contact Details',
+  props<{
+    contactDetails: OnboardingContactDetails;
+  }>(),
+);
+
+export const setNutritionistOnboardingNutritionExperience = createAction(
+  '[Onboarding] Set Nutritionist Onboarding Nutrition Experience',
+  props<{
+    nutritionistType: NutritionistType;
+    nutritionistExperience: string;
+    nutritionistDiets: string[];
+  }>(),
+);
+
+export const setNutritionistOnboardingConsultingLocation = createAction(
+  '[Onboarding] Set Nutritionist Onboarding Consulting Location',
+  props<{
+    consultingLocation: string[];
+  }>(),
+);
+
+export const setNutritionistOnboardingAvailability = createAction(
+  '[Onboarding] Set Nutritionist Onboarding Availability',
+  props<{
+    availability: { days: string[]; times: string[] };
+  }>(),
+);
+
+export const setNutritionistOnboardingLocation = createAction(
+  '[Onboarding] Set Nutritionist Onboarding Location',
+  props<{
+    country: string;
+    county: string;
+    city: string;
+    fullStreet: string;
+    cabinetName: string;
+  }>(),
+);
+
+export const completeOnboardingNutritionist = createAction(
+  '[Onboarding] Complete Onboarding Nutritionist',
+  props<{
+    nutritionistData: OnboardingNutritionist;
+  }>(),
+);
+
+export const completeOnboardingNutritionistSuccess = createAction(
+  '[Onboarding] Complete Onboarding Nutritionist Success',
+);
+
+export const completeOnboardingNutritionistFailure = createAction(
+  '[Onboarding] Complete Onboarding Nutritionist Failure',
   props<{
     error: ResponseError;
   }>(),

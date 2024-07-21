@@ -1,3 +1,5 @@
+import { OnboardingContactDetails, OnboardingPersonalDetails } from '@app/modules/onboarding/models/onboarding.model';
+
 export type NutritionistType =
   | 'Registered Dietitian'
   | 'Sports Nutritionist'
@@ -14,3 +16,19 @@ export type NutritionistType =
   | 'Postnatal Nutritionist'
   | 'Online Nutritionist'
   | 'Other';
+
+export interface OnboardingNutritionist {
+  personalDetails: OnboardingPersonalDetails | null;
+  contactDetails: OnboardingContactDetails | null;
+  nutritionistType: NutritionistType | null;
+  nutritionistExperience: string;
+  nutritionistDiets: string[];
+  consultingLocation: string[];
+  availabilityDays: string[];
+  availabilityTimes: string[];
+  country: string;
+  county: string;
+  city: string;
+  fullStreet: string;
+  cabinetName: string;
+}

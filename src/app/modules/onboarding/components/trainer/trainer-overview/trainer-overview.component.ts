@@ -6,7 +6,7 @@ import {
   setOnboardingSelectedStep,
   updateOnboardingStep,
 } from '@app/modules/onboarding/store/onboarding.actions';
-import { OnboardingClientSteps, TrainingLocation } from '@app/modules/onboarding/models/onboarding.model';
+import { OnboardingTrainerSteps, TrainingLocation } from '@app/modules/onboarding/models/onboarding.model';
 import { Store } from '@ngrx/store';
 import { selectOnboardingTrainer } from '@app/modules/onboarding/store/onboarding.selectors';
 import { NgIf } from '@angular/common';
@@ -40,6 +40,6 @@ export class TrainerOverviewComponent {
   }
 
   onBack() {
-    this._store.dispatch(setOnboardingSelectedStep({ step: OnboardingClientSteps.Location }));
+    this._store.dispatch(setOnboardingSelectedStep({ step: OnboardingTrainerSteps.Location }));
   }
 }

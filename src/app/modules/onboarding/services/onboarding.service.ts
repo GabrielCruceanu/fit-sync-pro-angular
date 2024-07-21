@@ -11,6 +11,7 @@ import { OnboardingStep, OnboardingType } from '@app/modules/onboarding/models/o
 import { Router } from '@angular/router';
 import { OnboardingClient } from '@app/modules/onboarding/models/client.model';
 import { OnboardingTrainer } from '@app/modules/onboarding/models/trainer.model';
+import { OnboardingNutritionist } from '@app/modules/onboarding/models/nutritionist.model';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +50,13 @@ export class OnboardingService {
     return of(true);
   }
   setOnboardingTrainerData(data: OnboardingTrainer): Observable<boolean> {
+    this._userService.setOnboarding = true;
+    // Replace with real API call
+    console.log('Onboarding data:', data);
+    this._router.navigate(['/dashboard']);
+    return of(true);
+  }
+  setOnboardingNutritionistData(data: OnboardingNutritionist): Observable<boolean> {
     this._userService.setOnboarding = true;
     // Replace with real API call
     console.log('Onboarding data:', data);

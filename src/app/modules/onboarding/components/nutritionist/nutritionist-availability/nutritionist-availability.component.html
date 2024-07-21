@@ -1,0 +1,50 @@
+<div class="mb-4 lg:mb-6 text-center">
+  <h1 class="text-2xl font-bold leading-tight tracking-tight">{{ onboardingSteps[4].title }}</h1>
+  <p class="text-lg font-light text-gray-500">
+    {{ onboardingSteps[4].description }}
+  </p>
+
+  <div *ngIf="error" class="text-red-500 text-xs mt-2">
+    {{ error }}
+  </div>
+</div>
+<div class="grid gap-4">
+  <form [formGroup]="daysForm" class="grid gap-3">
+    <ul formArrayName="days" class="grid grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-4" (change)="resetError()">
+      @for (day of days.controls; track i; let i = $index) {
+        <li [formGroupName]="i">
+          <input type="checkbox" [id]="i" class="hidden peer" formControlName="selected" />
+          <label
+            [for]="i"
+            class="inline-flex items-center justify-center w-full p-2 text-gray-400 bg-transparent border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+            <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/calendar-days.svg"></svg-icon>
+            <span class="w-full">{{ days.at(i).get('name')?.value }}</span>
+          </label>
+        </li>
+      }
+    </ul>
+  </form>
+  <form [formGroup]="timesForm" class="grid gap-3">
+    <div class="grid gap-3">
+      <p>Time you are available for training</p>
+      <ul formArrayName="times" class="grid grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-4" (change)="resetError()">
+        @for (time of times.controls; track i; let i = $index) {
+          <li [formGroupName]="i">
+            <input type="checkbox" [id]="i + '-t'" class="hidden peer" formControlName="selected" />
+            <label
+              [for]="i + '-t'"
+              class="inline-flex items-center justify-center w-full p-2 text-gray-400 bg-transparent border-2 border-gray-400 rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+              <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/clock.svg"></svg-icon>
+              <span class="w-full">{{ times.at(i).get('name')?.value }}</span>
+            </label>
+          </li>
+        }
+      </ul>
+    </div>
+  </form>
+
+  <div class="flex justify-between gap-3 mt-4">
+    <app-button class="w-full" full [impact]="'none'" (click)="onBack()">Back</app-button>
+    <app-button class="w-full" full [impact]="'bold'" (click)="onSubmit()">Next</app-button>
+  </div>
+</div>
