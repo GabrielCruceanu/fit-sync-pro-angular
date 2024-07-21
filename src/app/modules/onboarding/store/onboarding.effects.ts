@@ -43,6 +43,18 @@ export class OnboardingEffects {
     ),
   );
 
+  completeOnboardingNutritionist$ = createEffect(() =>
+    this._actions.pipe(
+      ofType(OnboardingActions.completeOnboardingNutritionist),
+      mergeMap(({ nutritionistData }) =>
+        this._onboardingService.setOnboardingNutritionistData(nutritionistData).pipe(
+          map(() => OnboardingActions.completeOnboardingNutritionistSuccess()),
+          catchError((error) => of(OnboardingActions.completeOnboardingNutritionistFailure({ error }))),
+        ),
+      ),
+    ),
+  );
+
   constructor(
     private _actions: Actions,
     private _onboardingService: OnboardingService,

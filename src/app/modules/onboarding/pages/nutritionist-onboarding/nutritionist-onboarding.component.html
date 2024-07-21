@@ -1,1 +1,23 @@
-<p>nutritionist-onboarding works!</p>
+@switch (onboardingCurrentStep()) {
+  @case (nutritionistOnboardingSteps.Contact) {
+    <app-nutritionist-contact-details/>
+  }
+  @case (nutritionistOnboardingSteps.NutritionExperience) {
+    <app-nutritionist-experience/>
+  }
+  @case (nutritionistOnboardingSteps.ConsultingLocation) {
+    <app-nutritionist-consulting-location/>
+  }
+  @case (nutritionistOnboardingSteps.Availability) {
+    <app-nutritionist-availability/>
+  }
+  @case (nutritionistOnboardingSteps.Location) {
+    <app-nutritionist-location/>
+  }
+  @case (nutritionistOnboardingSteps.Overview) {
+    <app-nutritionist-overview/>
+  }
+  @default{
+    <app-nutritionist-personal-details/>
+  }
+}

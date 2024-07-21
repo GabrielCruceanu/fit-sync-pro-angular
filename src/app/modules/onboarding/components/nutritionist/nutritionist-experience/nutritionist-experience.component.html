@@ -1,0 +1,88 @@
+<div class="mb-4 lg:mb-6 text-center">
+  <h1 class="text-2xl font-bold leading-tight tracking-tight">{{ onboardingSteps[2].title }}</h1>
+  <p class="text-lg font-light text-gray-500">
+    {{ onboardingSteps[2].description }}
+  </p>
+
+  <div *ngIf="error" class="text-red-500 text-xs mt-2">
+    {{ error }}
+  </div>
+</div>
+<div class="grid gap-4">
+  <form [formGroup]="form" class="grid gap-3">
+    <!--  Nutritionist Type  -->
+    <div class="grid md:grid-cols-2 gap-x-3 gap-y-4">
+      <div class="w-full">
+        <div class="relative">
+          <select
+            id="nutritionistType"
+            [ngClass]="{ 'border-red-500': nutritionistType?.touched && nutritionistType?.errors }"
+            class="peer block"
+            (change)="resetError()"
+            formControlName="nutritionistType">
+            @for (type of nutritionistTypes; track type) {
+              <option [value]="type">{{ type }}</option>
+            }
+          </select>
+
+          <label
+            for="nutritionistType"
+            class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+            Nutritionist Type
+          </label>
+        </div>
+        <div *ngIf="nutritionistType?.touched && nutritionistType?.errors" class="text-red-500 text-xs mt-2">
+          <div *ngIf="nutritionistType?.errors?.['required']">Required field</div>
+        </div>
+      </div>
+      <!--  Nutritionist Experience  -->
+      <div>
+        <div class="relative">
+          <select
+            id="nutritionistExperience"
+            [ngClass]="{ 'border-red-500': nutritionistExperience?.touched && nutritionistExperience?.errors }"
+            class="peer block"
+            (change)="resetError()"
+            formControlName="nutritionistExperience">
+            @for (year of yearsOfExperience; track year) {
+              <option [value]="year">{{ year }}</option>
+            }
+          </select>
+          <label
+            for="nutritionistExperience"
+            class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+            Years of Experience
+          </label>
+        </div>
+        <div
+          *ngIf="nutritionistExperience?.touched && nutritionistExperience?.errors"
+          class="text-red-500 text-xs mt-2">
+          <div *ngIf="nutritionistExperience?.errors?.['required']">Required field</div>
+        </div>
+      </div>
+    </div>
+
+    <p>What types of diets can you provide?</p>
+    <ul
+      formArrayName="nutritionistDiets"
+      class="grid grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-4"
+      (change)="resetError()">
+      @for (food of nutritionistDiets.controls; track i; let i = $index) {
+        <li [formGroupName]="i">
+          <input type="checkbox" [id]="i" class="hidden peer" formControlName="selected" />
+          <label
+            [for]="i"
+            class="inline-flex items-center justify-center w-full p-2 text-gray-400 border-2 border-gray-400 bg-transparent rounded-lg cursor-pointer peer-checked:border-primary peer-checked:text-primary-foreground peer-checked:bg-primary hover:text-primary-foreground hover:bg-primary hover:peer-checked:text-primary-foreground transition-all">
+            <svg-icon class="w-6 h-6 mr-2" src="assets/icons/heroicons/outline/nutrition.svg"></svg-icon>
+            <span class="w-full">{{ nutritionistDiets.at(i).get('name')?.value }}</span>
+          </label>
+        </li>
+      }
+    </ul>
+  </form>
+
+  <div class="flex justify-between gap-3 mt-4">
+    <app-button class="w-full" full [impact]="'none'" (click)="onBack()">Back</app-button>
+    <app-button class="w-full" full [impact]="'bold'" (click)="onSubmit()">Next</app-button>
+  </div>
+</div>

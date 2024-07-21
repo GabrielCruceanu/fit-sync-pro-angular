@@ -9,6 +9,8 @@ export const selectOnboardingClient = createSelector(selectOnboardingState, (sta
 
 export const selectOnboardingTrainer = createSelector(selectOnboardingState, (state: OnboardingState) => state.trainer);
 
+export const selectOnboardingNutritionist = createSelector(selectOnboardingState, (state) => state.nutritionist);
+
 export const selectOnboardingLoading = createSelector(selectOnboardingState, (state: OnboardingState) => state.loading);
 
 export const selectOnboardingError = createSelector(selectOnboardingState, (state: OnboardingState) => state.error);

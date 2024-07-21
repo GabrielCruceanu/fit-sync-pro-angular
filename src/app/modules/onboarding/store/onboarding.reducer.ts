@@ -12,6 +12,7 @@ import {
 } from '@app/modules/onboarding/models/onboarding.model';
 import { OnboardingClient } from '@app/modules/onboarding/models/client.model';
 import { OnboardingTrainer } from '@app/modules/onboarding/models/trainer.model';
+import { OnboardingNutritionist } from '@app/modules/onboarding/models/nutritionist.model';
 
 export interface OnboardingState extends EntityState<OnboardingStep> {
   error: ResponseError | null;
@@ -26,6 +27,7 @@ export interface OnboardingState extends EntityState<OnboardingStep> {
   type: OnboardingType;
   client: OnboardingClient;
   trainer: OnboardingTrainer;
+  nutritionist: OnboardingNutritionist;
 }
 
 export const adapter: EntityAdapter<OnboardingStep> = createEntityAdapter<OnboardingStep>();
@@ -70,6 +72,21 @@ export const initialState: OnboardingState = adapter.getInitialState({
     city: '',
     fullStreet: '',
     gymName: '',
+  },
+  nutritionist: {
+    personalDetails: null,
+    contactDetails: null,
+    nutritionistType: null,
+    nutritionistExperience: '',
+    nutritionistDiets: [],
+    consultingLocation: [],
+    availabilityDays: [],
+    availabilityTimes: [],
+    country: '',
+    county: '',
+    city: '',
+    fullStreet: '',
+    cabinetName: '',
   },
 });
 
@@ -252,6 +269,75 @@ export const onboardingReducer = createReducer(
     completed: true,
   })),
   on(OnboardingActions.completeOnboardingTrainerFailure, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  })),
+  on(OnboardingActions.setNutritionistOnboardingPersonalDetails, (state, { personalDetails }) => ({
+    ...state,
+    nutritionist: {
+      ...state.nutritionist,
+      personalDetails,
+    },
+  })),
+  on(OnboardingActions.setNutritionistOnboardingContactDetails, (state, { contactDetails }) => ({
+    ...state,
+    nutritionist: {
+      ...state.nutritionist,
+      contactDetails,
+    },
+  })),
+  on(
+    OnboardingActions.setNutritionistOnboardingNutritionExperience,
+    (state, { nutritionistType, nutritionistExperience, nutritionistDiets }) => ({
+      ...state,
+      nutritionist: {
+        ...state.nutritionist,
+        nutritionistType,
+        nutritionistExperience,
+        nutritionistDiets,
+      },
+    }),
+  ),
+  on(OnboardingActions.setNutritionistOnboardingConsultingLocation, (state, { consultingLocation }) => ({
+    ...state,
+    nutritionist: {
+      ...state.nutritionist,
+      consultingLocation,
+    },
+  })),
+  on(OnboardingActions.setNutritionistOnboardingAvailability, (state, { availability }) => ({
+    ...state,
+    nutritionist: {
+      ...state.nutritionist,
+      availabilityDays: availability.days,
+      availabilityTimes: availability.times,
+    },
+  })),
+  on(
+    OnboardingActions.setNutritionistOnboardingLocation,
+    (state, { country, county, city, fullStreet, cabinetName }) => ({
+      ...state,
+      nutritionist: {
+        ...state.nutritionist,
+        country,
+        county,
+        city,
+        fullStreet,
+        cabinetName,
+      },
+    }),
+  ),
+  on(OnboardingActions.completeOnboardingNutritionist, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(OnboardingActions.completeOnboardingNutritionistSuccess, (state) => ({
+    ...state,
+    loading: false,
+    completed: true,
+  })),
+  on(OnboardingActions.completeOnboardingNutritionistFailure, (state, { error }) => ({
     ...state,
     error,
     loading: false,
