@@ -1,5 +1,5 @@
-import { AuthState } from '@app/modules/auth/store/auth.state';
-import { OnboardingState } from '@app/modules/onboarding/store/onboarding.reducer';
+import { OnboardingState } from '@app/features/onboarding/store/onboarding.reducer';
+import { AuthState } from '@app/auth/store/auth.state';
 
 export enum Features {
   Auth = 'auth',
