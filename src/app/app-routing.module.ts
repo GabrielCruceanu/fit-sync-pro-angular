@@ -15,15 +15,15 @@ const routes: Routes = [
   }, // Auth routes for guests
   {
     path: 'auth',
-    loadChildren: () => import('@app/modules/auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('@app/auth/auth.module').then((m) => m.AuthModule),
   }, // Routes for authenticated users
   {
     path: '',
-    loadChildren: () => import('./modules/layout/layout.module').then((m) => m.LayoutModule),
+    loadChildren: () => import('@app/features/layout/layout.module').then((m) => m.LayoutModule),
   },
   {
     path: 'onboarding',
-    loadChildren: () => import('@app/modules/onboarding/onboarding.module').then((m) => m.OnboardingModule),
+    loadChildren: () => import('@app/features/onboarding/onboarding.module').then((m) => m.OnboardingModule),
   }, // Other routes go to the 'error/404' component
   { path: '**', redirectTo: 'error/404' },
 ];

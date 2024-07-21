@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DayOfWeek, TrainingAvailabilityTime } from '@app/modules/onboarding/models/training-availability-time.model';
+import { DayOfWeek, TrainingAvailabilityTime } from '@app/features/onboarding/models/training-availability-time.model';
 
 @Injectable({
   providedIn: 'root',
