@@ -140,35 +140,35 @@ export const ONBOARDING_NUTRITIONIST: OnboardingStep[] = [
     completed: false,
   },
   {
-    id: 5,
+    id: 4,
     title: 'Consulting Location',
     description: 'How would you like to consult?',
     completed: false,
   },
   {
-    id: 6,
+    id: 5,
     title: 'Availability',
     description: 'When are you available to consult?',
     completed: false,
   },
   {
-    id: 7,
+    id: 6,
     title: 'Location',
     description: 'Where are you located?',
     completed: false,
   },
   {
-    id: 8,
+    id: 7,
     title: 'Overview',
     description: 'Overview your information',
     completed: false,
   },
 ];
-export const OBBOARDING_GYM: OnboardingStep[] = [
+export const ONBOARDING_GYM: OnboardingStep[] = [
   {
     id: 1,
-    title: 'Personal Information',
-    description: 'Tell us about yourself',
+    title: 'Gym Information',
+    description: 'Tell us about your gym',
     completed: false,
   },
   {
@@ -179,37 +179,18 @@ export const OBBOARDING_GYM: OnboardingStep[] = [
   },
   {
     id: 3,
-    title: 'Nutrition Experience',
-    description:
-      'How would you describe your nutrition experience level? If you are not a nutritionist, please select "No".',
+    title: 'Availability',
+    description: 'When are you available?',
     completed: false,
   },
   {
     id: 4,
-    title: 'Fitness Experience',
-    description: 'How would you describe your fitness experience level?',
-    completed: false,
-  },
-  {
-    id: 5,
-    title: 'Training Location',
-    description: 'How would you like to train?',
-    completed: false,
-  },
-  {
-    id: 6,
-    title: 'Availability',
-    description: 'When are you available to train?',
-    completed: false,
-  },
-  {
-    id: 7,
     title: 'Location',
     description: 'Where are you located?',
     completed: false,
   },
   {
-    id: 8,
+    id: 5,
     title: 'Overview',
     description: 'Overview your information',
     completed: false,

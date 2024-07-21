@@ -55,6 +55,18 @@ export class OnboardingEffects {
     ),
   );
 
+  completeOnboardingGym$ = createEffect(() =>
+    this._actions.pipe(
+      ofType(OnboardingActions.completeOnboardingGym),
+      mergeMap(({ gymData }) =>
+        this._onboardingService.setOnboardingGymData(gymData).pipe(
+          map(() => OnboardingActions.completeOnboardingGymSuccess()),
+          catchError((error) => of(OnboardingActions.completeOnboardingGymFailure({ error }))),
+        ),
+      ),
+    ),
+  );
+
   constructor(
     private _actions: Actions,
     private _onboardingService: OnboardingService,

@@ -1,0 +1,82 @@
+<h1 class="text-2xl font-bold leading-tight tracking-tight text-center">{{ onboardingSteps[4].title }}</h1>
+<p class="mb-4 text-lg font-light text-gray-500 text-center lg:mb-6">
+  {{ onboardingSteps[4].description }}
+</p>
+<div class="grid gap-4 text-wrap">
+  <div class="grid lg:grid-cols-2 gap-3">
+    <div>
+      <span class="mr-1">Gym Name:</span>
+      <strong class="font-semibold">{{ onboarding().name }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Gym Type:</span>
+      <strong class="font-semibold"> {{ onboarding().gymType }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Active Personal Trainers:</span>
+      <strong class="font-semibold"> {{ onboarding().activePersonalTrainers }}</strong>
+    </div>
+    <div *ngIf="onboarding().contactDetails?.phone">
+      <span class="mr-1">Phone:</span>
+      <strong class="font-semibold"> {{ onboarding().contactDetails?.phone }}</strong>
+    </div>
+    <div *ngIf="onboarding().contactDetails?.website">
+      <span class="mr-1">Website:</span>
+      <strong class="font-semibold"> {{ onboarding().contactDetails?.website }}</strong>
+    </div>
+    <div *ngIf="onboarding().contactDetails?.facebook">
+      <span class="mr-1">Facebook:</span>
+      <strong class="font-semibold"> {{ onboarding().contactDetails?.facebook }}</strong>
+    </div>
+    <div *ngIf="onboarding().contactDetails?.instagram">
+      <span class="mr-1">Instagram:</span>
+      <strong class="font-semibold"> {{ onboarding().contactDetails?.instagram }}</strong>
+    </div>
+    <div *ngIf="onboarding().contactDetails?.linkedin">
+      <span class="mr-1">Linkedin:</span>
+      <strong class="font-semibold"> {{ onboarding().contactDetails?.linkedin }}</strong>
+    </div>
+    <div *ngIf="onboarding().contactDetails?.twitter">
+      <span class="mr-1">Twitter:</span>
+      <strong class="font-semibold"> {{ onboarding().contactDetails?.twitter }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Availability Days:</span>
+
+      <ul class="ml-3 list-disc list-inside">
+        @for (day of onboarding().availabilityDays; track day) {
+          <li>
+            <strong class="font-semibold">{{ day }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+    <div>
+      <span class="mr-1">Availability Times:</span>
+
+      <ul class="ml-3 list-disc list-inside">
+        @for (time of onboarding().availabilityTimes; track time) {
+          <li>
+            <strong class="font-semibold">{{ time }}</strong>
+          </li>
+        }
+      </ul>
+    </div>
+    <div>
+      <span class="mr-1">Country:</span> <strong class="font-semibold"> {{ onboarding().country }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">County:</span> <strong class="font-semibold"> {{ onboarding().county }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">City:</span> <strong class="font-semibold"> {{ onboarding().city }}</strong>
+    </div>
+    <div>
+      <span class="mr-1">Street name and number:</span> <strong class="font-semibold"> {{ onboarding().fullStreet }}</strong>
+    </div>
+  </div>
+  <div class="flex justify-between gap-3">
+    <app-button class="w-full" full [impact]="'none'" (click)="onBack()">Back</app-button>
+    <app-button class="w-full" full [impact]="'bold'" (click)="onSubmit()">Finish</app-button>
+  </div>
+</div>
