@@ -11,6 +11,8 @@ export const selectOnboardingTrainer = createSelector(selectOnboardingState, (st
 
 export const selectOnboardingNutritionist = createSelector(selectOnboardingState, (state) => state.nutritionist);
 
+export const selectOnboardingGym = createSelector(selectOnboardingState, (state) => state.gym);
+
 export const selectOnboardingLoading = createSelector(selectOnboardingState, (state: OnboardingState) => state.loading);
 
 export const selectOnboardingError = createSelector(selectOnboardingState, (state: OnboardingState) => state.error);

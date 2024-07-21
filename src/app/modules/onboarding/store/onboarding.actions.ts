@@ -13,6 +13,7 @@ import {
 import { ClientOnboardingPersonalDetails, OnboardingClient } from '@app/modules/onboarding/models/client.model';
 import { NutritionistType, OnboardingNutritionist } from '@app/modules/onboarding/models/nutritionist.model';
 import { OnboardingTrainer, TrainerType } from '@app/modules/onboarding/models/trainer.model';
+import { OnboardingGym } from '@app/modules/onboarding/models/gym.model';
 
 export const setOnboardingType = createAction(
   '[Onboarding] Set Onboarding Type',
@@ -264,6 +265,55 @@ export const completeOnboardingNutritionistSuccess = createAction(
 
 export const completeOnboardingNutritionistFailure = createAction(
   '[Onboarding] Complete Onboarding Nutritionist Failure',
+  props<{
+    error: ResponseError;
+  }>(),
+);
+
+export const setGymOnboardingGymInfo = createAction(
+  '[Onboarding] Set Gym Onboarding Gym Info',
+  props<{
+    name: string;
+    gymType: string;
+    activePersonalTrainers: string;
+  }>(),
+);
+
+export const setOnboardingGymContactDetails = createAction(
+  '[Onboarding] Set Gym Onboarding Contact Details',
+  props<{
+    contactDetails: OnboardingContactDetails;
+  }>(),
+);
+
+export const setGymOnboardingAvailability = createAction(
+  '[Onboarding] Set Gym Onboarding Availability',
+  props<{
+    availability: { days: string[]; times: string[] };
+  }>(),
+);
+
+export const setGymOnboardingLocation = createAction(
+  '[Onboarding] Set Gym Onboarding Location',
+  props<{
+    country: string;
+    county: string;
+    city: string;
+    fullStreet: string;
+  }>(),
+);
+
+export const completeOnboardingGym = createAction(
+  '[Onboarding] Complete Onboarding Gym',
+  props<{
+    gymData: OnboardingGym;
+  }>(),
+);
+
+export const completeOnboardingGymSuccess = createAction('[Onboarding] Complete Onboarding Gym Success');
+
+export const completeOnboardingGymFailure = createAction(
+  '[Onboarding] Complete Onboarding Gym Failure',
   props<{
     error: ResponseError;
   }>(),

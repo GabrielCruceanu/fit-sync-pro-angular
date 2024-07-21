@@ -1,1 +1,17 @@
-<p>gym-onboarding works!</p>
+@switch (onboardingCurrentStep()) {
+  @case (gymOnboardingSteps.Contact){
+    <app-gym-contact-details/>
+  }
+  @case (gymOnboardingSteps.Availability){
+    <app-gym-availability/>
+  }
+  @case (gymOnboardingSteps.Location){
+    <app-gym-location/>
+  }
+  @case (gymOnboardingSteps.Overview){
+    <app-gym-overview/>
+  }
+  @default {
+    <app-gym-personal-details  />
+  }
+}

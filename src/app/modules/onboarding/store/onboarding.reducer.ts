@@ -13,6 +13,7 @@ import {
 import { OnboardingClient } from '@app/modules/onboarding/models/client.model';
 import { OnboardingTrainer } from '@app/modules/onboarding/models/trainer.model';
 import { OnboardingNutritionist } from '@app/modules/onboarding/models/nutritionist.model';
+import { OnboardingGym } from '@app/modules/onboarding/models/gym.model';
 
 export interface OnboardingState extends EntityState<OnboardingStep> {
   error: ResponseError | null;
@@ -28,6 +29,7 @@ export interface OnboardingState extends EntityState<OnboardingStep> {
   client: OnboardingClient;
   trainer: OnboardingTrainer;
   nutritionist: OnboardingNutritionist;
+  gym: OnboardingGym;
 }
 
 export const adapter: EntityAdapter<OnboardingStep> = createEntityAdapter<OnboardingStep>();
@@ -87,6 +89,18 @@ export const initialState: OnboardingState = adapter.getInitialState({
     city: '',
     fullStreet: '',
     cabinetName: '',
+  },
+  gym: {
+    name: '',
+    gymType: '',
+    activePersonalTrainers: '',
+    contactDetails: null,
+    availabilityDays: [],
+    availabilityTimes: [],
+    country: '',
+    county: '',
+    city: '',
+    fullStreet: '',
   },
 });
 
@@ -338,6 +352,54 @@ export const onboardingReducer = createReducer(
     completed: true,
   })),
   on(OnboardingActions.completeOnboardingNutritionistFailure, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  })),
+  on(OnboardingActions.setGymOnboardingGymInfo, (state, { name, gymType, activePersonalTrainers }) => ({
+    ...state,
+    gym: {
+      ...state.gym,
+      name,
+      gymType,
+      activePersonalTrainers,
+    },
+  })),
+  on(OnboardingActions.setOnboardingGymContactDetails, (state, { contactDetails }) => ({
+    ...state,
+    gym: {
+      ...state.gym,
+      contactDetails,
+    },
+  })),
+  on(OnboardingActions.setGymOnboardingAvailability, (state, { availability }) => ({
+    ...state,
+    gym: {
+      ...state.gym,
+      availabilityDays: availability.days,
+      availabilityTimes: availability.times,
+    },
+  })),
+  on(OnboardingActions.setGymOnboardingLocation, (state, { country, county, city, fullStreet }) => ({
+    ...state,
+    gym: {
+      ...state.gym,
+      country,
+      county,
+      city,
+      fullStreet,
+    },
+  })),
+  on(OnboardingActions.completeOnboardingGym, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(OnboardingActions.completeOnboardingGymSuccess, (state) => ({
+    ...state,
+    loading: false,
+    completed: true,
+  })),
+  on(OnboardingActions.completeOnboardingGymFailure, (state, { error }) => ({
     ...state,
     error,
     loading: false,

@@ -1,0 +1,77 @@
+<h1 class="text-2xl font-bold leading-tight tracking-tight text-center">{{ onboardingSteps[0].title }}</h1>
+<p class="mb-4 text-lg font-light text-gray-500 text-center lg:mb-6">
+  {{ onboardingSteps[0].description }}
+</p>
+<div class="grid gap-4">
+  <form class="grid md:grid-cols-3 gap-x-3 gap-y-4" [formGroup]="form">
+    <!--  Gym Name  -->
+    <div>
+      <div class="relative">
+        <input
+          type="text"
+          id="name"
+          [ngClass]="{ 'border-red-500': f['name'].touched && f['name'].errors }"
+          class="peer block"
+          placeholder=" "
+          formControlName="name"/>
+        <label
+          for="name"
+          class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+          Gym Name
+        </label>
+      </div>
+      <div *ngIf="f['name'].touched && f['name'].errors" class="text-red-500 text-xs mt-2">
+        <div *ngIf="f['name'].errors?.['name']">Required field</div>
+      </div>
+    </div>
+    <!--  GymType  -->
+    <div>
+      <div class="relative">
+        <select
+          id="gymType"
+          [ngClass]="{ 'border-red-500': f['gymType'].touched && f['gymType'].errors }"
+          class="peer block"
+          formControlName="gymType">
+          @for (type of gymTypes; track type) {
+            <option [value]="type">{{ type }}</option>
+          }
+        </select>
+
+        <label
+          for="gymType"
+          class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+          Gym Type
+        </label>
+      </div>
+      <div *ngIf="f['gymType'].touched && f['gymType'].errors" class="text-red-500 text-xs mt-2">
+        <div *ngIf="f['gymType'].errors?.['gymType']">Required field</div>
+      </div>
+    </div>
+    <!--  Active Personal Trainers  -->
+    <div>
+      <div class="relative">
+        <input
+          type="number"
+          id="activePersonalTrainers"
+          [ngClass]="{ 'border-red-500': f['activePersonalTrainers'].touched && f['activePersonalTrainers'].errors }"
+          class="peer block"
+          placeholder=" "
+          formControlName="activePersonalTrainers"/>
+        <label
+          for="activePersonalTrainers"
+          class="absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-95 transform bg-background px-2 text-sm text-muted-foreground duration-300 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-95 peer-focus:px-2 peer-focus:text-primary">
+          Active Personal Trainers
+        </label>
+      </div>
+      <div
+        *ngIf="f['activePersonalTrainers'].touched && f['activePersonalTrainers'].errors"
+        class="text-red-500 text-xs mt-2">
+        <div *ngIf="f['activePersonalTrainers'].errors?.['required']">Required field</div>
+      </div>
+    </div>
+  </form>
+  <div class="flex justify-between gap-3 mt-4">
+    <app-button class="w-full" full [impact]="'none'" (click)="onBack()">Back</app-button>
+    <app-button class="w-full" full [impact]="'bold'" (click)="onSubmit()">Next</app-button>
+  </div>
+</div>
